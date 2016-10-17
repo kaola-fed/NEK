@@ -1,19 +1,54 @@
 {
   "name": "nek",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Nice easy Kaoka project toolkit.",
-  "main": "index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --recursive --compilers js:babel-core/register",
+    "lint": "eslint --ext js src || exit 0",
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaola-fed/NEK.git"
+    "url": "git+https://github.com/int64ago/rm-bom.git"
   },
+  "keywords": [
+    "UTF-8",
+    "BOM",
+    "strip"
+  ],
   "author": "Kaola",
-  "license": "ISC",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "nek": "lib/index.js"
+  },
   "bugs": {
     "url": "https://github.com/kaola-fed/NEK/issues"
   },
-  "homepage": "https://github.com/kaola-fed/NEK#readme"
+  "homepage": "https://github.com/kaola-fed/NEK#readmee",
+  "dependencies": {
+    "command-line-usage": "^3.0.4",
+    "minimatch": "^3.0.3",
+    "minimist": "^1.2.0",
+    "rc": "^1.1.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-preset-es2015": "^6.16.0",
+    "chai": "^3.5.0",
+    "eslint": "^3.8.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0",
+    "mocha": "^3.1.2"
+  },
+  "engines": {
+    "node": ">= 4"
+  }
 }
