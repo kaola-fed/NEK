@@ -1,6 +1,6 @@
 {
   "name": "nek",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nice easy Kaoka project toolkit.",
   "files": [
     "lib"
