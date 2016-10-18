@@ -21,7 +21,7 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  const { key, name } = argv;
+  const { name } = argv;
   const json = await request('https://jsonplaceholder.typicode.com/posts/1');
   console.log(json, name);
 };
