@@ -1,15 +1,6 @@
 #! /usr/bin/env node
 
-import { options, printUsage, printVersion } from './util/args';
+import yargs from 'yargs';
 
-const opts = options();
-
-if (opts.h) {
-  printUsage();
-  process.exit();
-}
-
-if (opts.v) {
-  printVersion();
-  process.exit();
-}
+yargs
+  .commandDir('commands').demand(1).help().argv;
