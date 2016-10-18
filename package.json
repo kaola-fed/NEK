@@ -1,24 +1,28 @@
 {
   "name": "nek",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Nice easy Kaoka project toolkit.",
   "files": [
     "lib"
   ],
   "scripts": {
     "test": "mocha --recursive --compilers js:babel-core/register",
-    "lint": "eslint --ext js src || exit 0",
+    "lint": "eslint --ext js src",
     "build": "babel src -d lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/int64ago/rm-bom.git"
   },
   "keywords": [
-    "UTF-8",
-    "BOM",
-    "strip"
+    "Kaola",
+    "toolkit",
+    "freemarker",
+    "RegularJS",
+    "template"
   ],
   "author": "Kaola",
   "license": "MIT",
@@ -29,7 +33,7 @@
   "bugs": {
     "url": "https://github.com/kaola-fed/NEK/issues"
   },
-  "homepage": "https://github.com/kaola-fed/NEK#readmee",
+  "homepage": "https://github.com/kaola-fed/NEK#readme",
   "dependencies": {
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-polyfill": "^6.16.0",
