@@ -6,6 +6,11 @@ Nice easy Kaola project toolkit
 
 ## How to use
 
+## How to publish
+
+ - `npm version patch/minor/major`
+ - `npm publish`
+
 ## License
 [![license][license-img]][license-url]
 
