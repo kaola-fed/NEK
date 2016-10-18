@@ -9,13 +9,13 @@
     "test": "mocha --recursive --compilers js:babel-core/register",
     "lint": "eslint --ext js src",
     "build": "babel src -d lib",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "preversion": "npm test",
     "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/int64ago/rm-bom.git"
+    "url": "https://github.com/kaola-fed/NEK"
   },
   "keywords": [
     "Kaola",
