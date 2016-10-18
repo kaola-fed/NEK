@@ -13,7 +13,7 @@ exports.builder = {
   },
   n: {
     alias: 'name',
-    demand: true,
+    demand: false,
     default: 'local.test',
     describe: 'Folder names or file names to create.',
     type: 'string',
