@@ -1,4 +1,4 @@
-import Builder from '../lib/builder';
+import Builder from '../core/builder';
 
 exports.command = 'build [options]';
 
