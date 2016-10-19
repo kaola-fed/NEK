@@ -29,4 +29,3 @@ exports.handler = async (argv) => {
     console.log(error);
   }
 };
-
