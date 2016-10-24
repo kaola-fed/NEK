@@ -35,12 +35,13 @@
   },
   "homepage": "https://github.com/kaola-fed/NEK#readme",
   "dependencies": {
+    "handlebars": "^4.0.5",
+    "js-beautify": "^1.6.4",
+    "mkdirp-promise": "^3.0.1",
     "rc": "^1.1.6",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
-    "yargs": "^6.2.0",
-    "handlebars": "^4.0.5",
-    "js-beautify": "^1.6.4"
+    "yargs": "^6.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",

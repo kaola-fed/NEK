@@ -2,5 +2,5 @@
     "projectId":"xxx",
     "webRoot":"./src/main/webapp/backend",
     "viewRoot":"./src/main/webapp/backend/template",
-    "uiRoot":"./src/main/webapp/backend/src/javascript/"
+    "jsRoot":"./src/main/webapp/backend/src/javascript/page/"
 }

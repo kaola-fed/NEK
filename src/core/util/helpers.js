@@ -1,9 +1,22 @@
+/* eslint prefer-arrow-callback:0 */
+/* 由于箭头函数中的this是外部的this, 所以这里没法使用箭头函数; */
 export default (Handlebars) => {
-  Handlebars.registerHelper('model', context => `{${context}}`);
-  Handlebars.registerHelper('rules', context => `{rules.${context}`);
-  Handlebars.registerHelper('json', context => JSON.stringify(context));
+  Handlebars.registerHelper('model', function (context) { return `{${context}}`; });
+  Handlebars.registerHelper('rules', function (context) { return `{rules.${context}}`; });
 
-  Handlebars.registerHelper('ifCond', (v1, operator, v2, options) => {
+  Handlebars.registerHelper('isBinding', function (key, options) {
+    const array = ['value', 'source'];
+    if (array.indexOf(key) != -1) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
+
+  Handlebars.registerHelper('json', function (context) {
+    return JSON.stringify(context);
+  });
+
+  Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     switch (operator) {
       case '==':
         /* eslint eqeqeq:0 */
@@ -25,13 +38,5 @@ export default (Handlebars) => {
       default:
         return options.inverse(this);
     }
-  });
-
-  Handlebars.registerHelper('isBinding', (key, options) => {
-    const array = ['value', 'source'];
-    if (array.indexOf(key) != -1) {
-      return options.fn(this);
-    }
-    return options.inverse(this);
   });
 };

@@ -6,20 +6,23 @@ import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
 
 class BaseParser {
-  constructor(json, path) {
-    this.path = path;
-    this.json = json;
-    this.modules = null;
+  constructor(meta, modules, template) {
+    this.meta = meta;
+    this._modules = modules;
+    this.template = template;
 
     helpers(Handlebars);
   }
 
-  set modules(modules) { this.modules = modules; }
+  set modules(modules) {
+    this._modules = modules;
+  }
 
   get modules() {
-    if (this.modules) return this.modules;
+    if (this._modules) return this._modules;
+    if (!this.meta) return null;
 
-    const { rows } = this.json;
+    const { rows } = this.meta;
     const array = [];
     rows.forEach((row) => {
       const { components } = row;
@@ -28,9 +31,12 @@ class BaseParser {
     return array;
   }
 
-  parse() {
+  parse(meta) {
+    this.meta = meta;
+    this.loadTemplate();
+
     this.writePage();
-    this.writeModule();
+    this.writeModules();
   }
 
 }
