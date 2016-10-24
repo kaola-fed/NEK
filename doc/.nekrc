@@ -1,6 +1,9 @@
 {
     "projectId":"xxx",
     "webRoot":"./src/main/webapp/backend",
-    "viewRoot":"./src/main/webapp/backend/template",
-    "jsRoot":"./src/main/webapp/backend/src/javascript/page/"
+    "viewRoot":"./src/main/webapp/backend/template/page",
+    "jsRoot":"./src/main/webapp/backend/src/javascript/page/",
+    "BaseComponent":"pro/widget/BaseComponent",
+    "ListComponent":"pro/components/ListComponent",
+    "BaseModal":"pro/components/modal/modal"
 }

@@ -1,16 +1,27 @@
+import path from 'path';
+
 import BaseParser from './base';
+import conf from '../../util/rc';
 
 class FreeMarkerParser extends BaseParser {
-  async loadTemplate() {
-    console.log('undone');
+  constructor() {
+    super();
+    this.templatePath = './tmp/template.ftl';
+  }
+
+  format(content) {
+    return content;
   }
 
   async writePage() {
-    console.log('undone');
-  }
+    const meta = this.meta;
+    const rst = this.template(meta);
+    const url = meta.pageName;
+    const pos = url.lastIndexOf('/');
+    const out = path.join(conf.viewRoot, url.substring(0, pos));
+    const name = url.substring(pos + 1);
 
-  async writeModules() {
-    console.log('undone');
+    this._writeFile(out, `${name}.ftl`, rst);
   }
 }
 

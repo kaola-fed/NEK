@@ -11,7 +11,9 @@
     "build": "babel src -d lib",
     "prepublishOnly": "npm run build",
     "preversion": "npm test",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags",
+    "watch": "babel -w src/ -d lib",
+    "dev": "npm run watch & nodemon --watch lib --debug ./lib/index.js build -k 123"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "rc": "^1.1.6",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
+    "uppercamelcase": "^1.1.0",
     "yargs": "^6.2.0"
   },
   "devDependencies": {

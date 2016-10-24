@@ -1,5 +1,7 @@
 /* eslint prefer-arrow-callback:0 */
 /* 由于箭头函数中的this是外部的this, 所以这里没法使用箭头函数; */
+import uppercamelcase from 'uppercamelcase';
+
 export default (Handlebars) => {
   Handlebars.registerHelper('model', function (context) { return `{${context}}`; });
   Handlebars.registerHelper('rules', function (context) { return `{rules.${context}}`; });
@@ -14,6 +16,11 @@ export default (Handlebars) => {
 
   Handlebars.registerHelper('json', function (context) {
     return JSON.stringify(context);
+  });
+
+  Handlebars.registerHelper('cammel', function (context) {
+    const name = uppercamelcase(context);
+    return `${name}Modal`;
   });
 
   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
