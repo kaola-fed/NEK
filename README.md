@@ -1,6 +1,6 @@
 # NEK
 
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Downloads][downloads-image]][npm-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Downloads][downloads-image]][npm-url] [![Code style][style-image]][style-url]
 
 Nice easy Kaola project toolkit
 
@@ -12,7 +12,7 @@ Nice easy Kaola project toolkit
  - `npm publish`
 
 ## License
-[![license][license-img]][license-url]
+[![license][license-image]][license-url]
 
 
 [downloads-image]: https://img.shields.io/npm/dm/nek.svg
@@ -24,4 +24,7 @@ Nice easy Kaola project toolkit
 [travis-image]: https://img.shields.io/travis/kaola-fed/NEK.svg
 
 [license-url]: https://github.com/kaola-fed/NEK/blob/master/LICENSE
-[license-img]: https://img.shields.io/github/license/kaola-fed/NEK.svg
+[license-image]: https://img.shields.io/github/license/kaola-fed/NEK.svg
+
+[style-url]: https://github.com/airbnb/javascript
+[style-image]: https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg
