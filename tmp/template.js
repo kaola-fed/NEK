@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+/* beautify ignore:start */
 define(['{{BaseComponent}}'
   {{#each modals}}
     ,'../modal/{{name}}/index.js'
@@ -7,6 +7,7 @@ define(['{{BaseComponent}}'
   {{#each modules}}
     ,'./{{name}}/index.js'
   {{/each}}
+/* beautify ignore:end */
 ], function(BaseComponent
   {{#each modals}}
     ,{{cammel name}}
@@ -21,5 +22,5 @@ define(['{{BaseComponent}}'
     }
   });
 
-  return Component;;
+  return Component;
 });

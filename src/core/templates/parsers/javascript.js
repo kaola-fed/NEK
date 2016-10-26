@@ -11,7 +11,10 @@ class JavascriptParser extends BaseParser {
   }
 
   format(content) {
-    return js_beautify(content, { indent_size: 2 });
+    let out = js_beautify(content, { indent_size: 2 });
+    const comment = /^\/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+\/$/gim;
+    out = out.split('\n').filter(line => !comment.test(line));
+    return out.join('\n');
   }
 
   async writePage() {

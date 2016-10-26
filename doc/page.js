@@ -33,46 +33,43 @@
 export default {
   "projectId": "xxx",
   "pageName": "local.test",
-  "structure": [{
-    "layout":{
-      "margin-bottom": 20
-    },
+  "rows": [{
+    "clazz":"f-mb10",
     "components":[{
-      "type": "LABEL",
-      "typeId": 41,
-      "layout": {
-        "cols": 2
+      "name": "label",
+      "id": 41,
+      "clazz":"f-mr10",
+      "layout":{
+        "cols":2,
       },
-      "data": {
-        "text": "支出费用"
-      }
+      "text":"支出费用"
     },{
-      "type": "INPUT",
-      "typeId": 1,
-      "layout": {
-        "cols": 2
+      "name": "input2",
+      "id": 1,
+      "clazz":"g-offset-2",
+      "layout":{
+        "cols":2
       },
-      "data": {
-        "model": "order.fee",
+      "attributes": {
+        "value": "order.fee",
         "placeholder": "费用",
-        "rules": [{ "type": "isFilled", "message": "请输入费用" }]
+        "validate": {
+          "name":"fee",
+          "rules":[{"type":"isFilled","message":"请输入费用" }]
+        }
       }
     }]
   }, {
-    "layout": {
-      "margin-bottom": 20
-    },
+    "clazz":"f-mb10",
     "components": [{
-      "type": "Custom",
-      "typeId": 0,
+      "id": 0,
       "name": "add.stock",
-      "structrue": [{
-        "layout": {
-          "margin-bottom": 20
-        },
+      "desc": "增加库存模块",
+      "rows": [{
+        "clazz":"f-mb10",
         "components": [{
-          "type": "LABEL",
-          "typeId": 41,
+          "name": "LABEL",
+          "id": 41,
           "layout": {
             "cols": 2
           },

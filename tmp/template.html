@@ -1,33 +1,35 @@
 {{#each rows}}
 <div class="{{clazz}} g-row">
 	{{#each components}}
+	<div class="g-col g-col-{{layout.cols}} {{clazz}}">
 	{{#if id}}
 	{{!-- 组件开始 --}}
 	<{{name}}
-	{{!-- 遍历组件属性，3种情况：1. 需要绑定的 2. 需要验证的 3. 普通字符串属性 --}}
-	{{#each attributes}}
-	{{#isBinding @key}}
-	{{@key}}={{model this}}
+		{{!-- 遍历组件属性，3种情况：1. 需要绑定的 2. 需要验证的 3. 普通字符串属性 --}}
+		{{#each attributes}}
+			{{#isBinding @key}}
+			{{@key}}={{model this}}
+			{{else}}
+				{{#ifCond @key '==' 'validate'}}
+				rules={{rules this.name}}
+				{{else}}
+				{{@key}}="{{this}}"
+			{{/ifCond}}
+			{{/isBinding}}
+		{{/each}}
+		{{#if text}}
+		{{!-- 组件结束：闭合标签 --}}
+			>{{text}}</{{name}}>
+		{{else}}
+			{{!-- 组件结束：自闭合标签 --}}
+			/>
+		{{/if}}
 	{{else}}
-	{{#ifCond @key '==' 'validate'}}
-	rules={{rules this.name}}
-	{{else}}
-	{{@key}}="{{this}}"
-	{{/ifCond}}
-	{{/isBinding}}
-	{{/each}}
-	{{#if text}}
-	{{!-- 组件结束：闭合标签 --}}
-	>{{text}}</{{name}}>
-{{else}}
-{{!-- 组件结束：自闭合标签 --}}
-/>
-{{/if}}
-{{else}}
-{{！自定义模块备注 }}
-<!-- {{desc}} -->
-<{{name}} />
-{{/if}}
+	{{！自定义模块备注 }}
+	<!-- {{desc}} -->
+	<{{name}} />
+	{{/if}}
+	</div>
 {{/each}}
 </div>
 {{/each}}
