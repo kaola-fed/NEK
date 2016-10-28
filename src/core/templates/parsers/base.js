@@ -58,7 +58,7 @@ class BaseParser {
     }
   }
 
-  async writeFile(dir, filename, content) {
+  async _writeFile(dir, filename, content) {
     const out = path.join(dir, filename);
     if (fs.existsSync(out)) { return console.warn(`Exist File: ${out}`); }
 
