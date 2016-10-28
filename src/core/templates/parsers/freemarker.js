@@ -4,9 +4,9 @@ import BaseParser from './base';
 import conf from '../../util/rc';
 
 class FreeMarkerParser extends BaseParser {
-  constructor() {
-    super();
-    this.templatePath = './tmp/template.ftl';
+  constructor(meta) {
+    super(meta);
+    this.templateUrl = meta.templates.freemarker;
   }
 
   format(content) {
@@ -15,7 +15,7 @@ class FreeMarkerParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
-    const rst = this.template(meta);
+    const rst = this.renderFn(meta);
     const url = meta.pageName;
     const pos = url.lastIndexOf('/');
     const out = path.join(conf.viewRoot, url.substring(0, pos));

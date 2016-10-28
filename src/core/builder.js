@@ -1,10 +1,11 @@
 import request from 'request-promise';
 
 import TemplateFactory from './templates/factory';
+
 /**
  * Builder类
  * @param key {String} - 工程+页面的唯一标识
- * @param meta {Object} - 从远端获取到的页面配置对象;
+ * @param meta {Object} - 从远端获取到的页面配置对象, 包括js, html, ftl等文件的模板路径
  */
 class Builder {
   constructor(key) {
@@ -14,8 +15,7 @@ class Builder {
 
   /**
    * 步骤:
-   * 1. 从远端根据用户输入的k参数获取页面meta配置;
-   * 2. 从远端根据k参数去取模板库;
+   * 1. 从远端根据用户输入的k参数获取页面meta配置, meta中包含模板库的访问url;
    * 3. 取完后根据meta配置输出代码;
    */
   async run() {
@@ -24,16 +24,22 @@ class Builder {
   }
 
   async getMeta() {
-    const resp = await request('http://127.0.0.1:3000/projects/haitao/meta.json', { json: true });
+    console.log('开始获取页面配置数据...');
+    try {
+      const resp = await request('http://127.0.0.1:3000/projects/haitao/meta.json', { json: true });
 
-    if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
-    this.meta = resp.meta || {};
+      if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
+      this.meta = resp.meta || {};
+    } catch (err) {
+      console.error('请求页面数据失败,请检查网络...');
+      process.exit(1);
+    }
   }
 
   render() {
-    ['freemarker', 'javascript', 'html'].forEach((template) => {
-      const parser = TemplateFactory.create(template);
-      parser.parse(this.meta);
+    ['entry', 'freemarker', 'javascript', 'html'].forEach((type) => {
+      const parser = TemplateFactory.create(type, this.meta);
+      parser.parse();
     }, this);
   }
 }

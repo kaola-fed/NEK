@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/kaola-fed/NEK#readme",
   "dependencies": {
+    "console-stamp": "^0.2.4",
     "handlebars": "^4.0.5",
     "js-beautify": "^1.6.4",
     "mkdirp-promise": "^3.0.1",

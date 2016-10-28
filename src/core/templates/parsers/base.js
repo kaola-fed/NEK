@@ -5,22 +5,20 @@
 import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp-promise';
+import request from 'request-promise';
 import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
 
 class BaseParser {
-  constructor(meta, modules, modals, template) {
+  constructor(meta) {
     this.meta = meta;
-    this._modules = modules;
-    this._modals = modals;
-    this.template = template;
+    this._modules = null;
+    this._modals = null;
 
     helpers(Handlebars);
   }
 
-  set modules(modules) {
-    this._modules = modules;
-  }
+  set modules(modules) { this._modules = modules; }
 
   get modules() {
     if (this._modules) return this._modules;
@@ -29,9 +27,7 @@ class BaseParser {
     return this.customs(rows, false);
   }
 
-  set modals(modals) {
-    this._modals = modals;
-  }
+  set modals(modals) { this._modals = modals; }
 
   get modals() {
     if (this._modals) return this._modals;
@@ -51,25 +47,31 @@ class BaseParser {
 
   format(content) { return content; }
 
-  async _writeFile(out, filename, content) {
-    await mkdirp(out);
-    fs.writeFile(path.join(out, filename), this.format(content));
-  }
-
   async loadTemplate() {
-    const cwd = process.cwd();
-    const source = fs.readFileSync(path.join(cwd, this.templatePath), 'utf-8');
-    const template = Handlebars.compile(source, { noEscape: true });
-
-    this.template = template;
+    console.log(`template: ${this.templateUrl}`);
+    try {
+      const source = await request(this.templateUrl);
+      this.renderFn = Handlebars.compile(source, { noEscape: true });
+    } catch (e) {
+      console.error('模板文件请求失败,请检查...');
+      process.exit(1);
+    }
   }
 
-  parse(meta) {
-    this.meta = meta;
-    this.loadTemplate();
+  async _writeFile(dir, filename, content) {
+    const out = path.join(dir, filename);
+    await mkdirp(dir);
+    fs.writeFile(out, this.format(content));
+
+    console.log(`Output File: ${out}`);
+  }
+
+  async parse() {
+    await this.loadTemplate();
 
     if (this.writePage) this.writePage();
     if (this.writeModules) this.writeModules();
+    if (this.writeModals) this.writeModals();
   }
 
 }

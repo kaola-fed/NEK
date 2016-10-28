@@ -10,9 +10,9 @@ import BaseParser from './base';
 import conf from '../../util/rc';
 
 class HtmlParser extends BaseParser {
-  constructor() {
-    super();
-    this.templatePath = './tmp/template.html';
+  constructor(meta) {
+    super(meta);
+    this.templateUrl = meta.templates.html;
   }
 
   format(content) {
@@ -21,7 +21,7 @@ class HtmlParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
-    const rst = this.template(meta);
+    const rst = this.renderFn(meta);
     const out = path.join(conf.jsRoot, meta.pageName, 'modules');
 
     this._writeFile(out, 'page.html', rst);
@@ -32,9 +32,28 @@ class HtmlParser extends BaseParser {
     const meta = this.meta;
     modules.forEach((mod) => {
       const { name } = mod;
-      const rst = this.template(mod);
+      const rst = this.renderFn(mod);
       const out = path.join(conf.jsRoot, meta.pageName, 'modules', name);
 
+      this._writeFile(out, 'index.html', rst);
+    });
+  }
+
+  async writeModals() {
+    const modals = this.modals;
+    const modules = this.modules;
+    const meta = this.meta;
+
+    modules.forEach((mod) => {
+      const { rows } = mod;
+      modals.push(...this.customs(rows, true));
+    });
+
+    modals.forEach((modal) => {
+      const { name } = modal;
+      const rst = this.renderFn(modal);
+
+      const out = path.join(conf.jsRoot, meta.pageName, 'modals', name);
       this._writeFile(out, 'index.html', rst);
     });
   }

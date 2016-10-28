@@ -26,6 +26,6 @@ exports.handler = async (argv) => {
     const builder = new Builder(key);
     builder.run();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
