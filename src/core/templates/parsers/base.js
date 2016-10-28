@@ -58,8 +58,10 @@ class BaseParser {
     }
   }
 
-  async _writeFile(dir, filename, content) {
+  async writeFile(dir, filename, content) {
     const out = path.join(dir, filename);
+    if (fs.existsSync(out)) { return console.warn(`Exist File: ${out}`); }
+
     await mkdirp(dir);
     fs.writeFile(out, this.format(content));
 
