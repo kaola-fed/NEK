@@ -43,6 +43,7 @@
     "handlebars": "^4.0.5",
     "js-beautify": "^1.6.4",
     "mkdirp-promise": "^3.0.1",
+    "moky": "^1.1.2",
     "rc": "^1.1.6",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
