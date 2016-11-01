@@ -1,4 +1,5 @@
 /* eslint prefer-arrow-callback:0 */
+/* eslint func-names:0 */
 /* 由于箭头函数中的this是外部的this, 所以这里没法使用箭头函数; */
 import uppercamelcase from 'uppercamelcase';
 
