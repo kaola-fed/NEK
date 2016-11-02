@@ -40,7 +40,9 @@ class BaseParser {
     const array = [];
     rows.forEach((row) => {
       const { components } = row;
-      array.push(...components.filter(component => component.id === 0 && component.modal === flag));
+      array.push(...components.filter(component =>
+        component.id === 0 && !!component.modal === flag
+      ));
     });
     return array;
   }
