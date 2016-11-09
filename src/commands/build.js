@@ -7,24 +7,24 @@ exports.desc = 'Build a new page';
 exports.builder = {
   k: {
     alias: 'key',
-    demand: true,
+    demand: false,
     describe: 'Unique id mapped the project and the page configuration json object',
     type: 'string',
   },
-  n: {
-    alias: 'name',
+  u: {
+    alias: 'url',
     demand: false,
-    default: 'local.test',
-    describe: 'Folder names or file names to create.',
+    describe: '输入页面的url,NEK根据URL生成指定的约定的目录结构',
     type: 'string',
   },
 };
 
 exports.handler = async (argv) => {
-  const { key } = argv;
+  const { key, url } = argv;
+
   try {
     const builder = new Builder(key);
-    builder.run();
+    builder.run(url);
   } catch (error) {
     console.error(error);
   }

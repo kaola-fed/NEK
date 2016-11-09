@@ -22,18 +22,17 @@ class HtmlParser extends BaseParser {
   async writePage() {
     const meta = this.meta;
     const rst = this.renderFn(meta);
-    const out = path.join(conf.jsRoot, meta.pageName, 'modules');
+    const out = path.join(conf.jsRoot, this._getPagePath(), 'modules');
 
     this._writeFile(out, 'page.html', rst);
   }
 
   async writeModules() {
     const modules = this.modules;
-    const meta = this.meta;
     modules.forEach((mod) => {
       const { name } = mod;
       const rst = this.renderFn(mod);
-      const out = path.join(conf.jsRoot, meta.pageName, 'modules', name);
+      const out = path.join(conf.jsRoot, this._getPagePath(), 'modules', name);
 
       this._writeFile(out, 'index.html', rst);
     });
@@ -42,18 +41,19 @@ class HtmlParser extends BaseParser {
   async writeModals() {
     const modals = this.modals;
     const modules = this.modules;
-    const meta = this.meta;
 
     modules.forEach((mod) => {
       const { rows } = mod;
-      modals.push(...this.customs(rows, true));
+      if (rows && rows.length) {
+        modals.push(...this.customs(rows, true));
+      }
     });
 
     modals.forEach((modal) => {
       const { name } = modal;
       const rst = this.renderFn(modal);
 
-      const out = path.join(conf.jsRoot, meta.pageName, 'modals', name);
+      const out = path.join(conf.jsRoot, this._getPagePath(), 'modals', name);
       this._writeFile(out, 'index.html', rst);
     });
   }

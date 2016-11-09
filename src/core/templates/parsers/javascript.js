@@ -21,20 +21,20 @@ class JavascriptParser extends BaseParser {
     meta.modals = this.modals;
     const merged = { ...meta, ...conf, isPage: true };
     const rst = this.renderFn(merged);
-    const out = path.join(conf.jsRoot, meta.pageName, 'modules');
+    const out = path.join(conf.jsRoot, this._getPagePath(), 'modules');
 
     this._writeFile(out, 'page.js', rst);
   }
 
   async writeModules() {
     const modules = this.modules;
-    const meta = this.meta;
+
     modules.forEach((mod) => {
       const { name, rows } = mod;
       const modals = { modals: this.customs(rows, true) };
       const merged = { ...mod, ...modals, ...conf };
       const rst = this.renderFn(merged);
-      const out = path.join(conf.jsRoot, meta.pageName, 'modules', name);
+      const out = path.join(conf.jsRoot, this._getPagePath(), 'modules', name);
 
       this._writeFile(out, 'index.js', rst);
     });
@@ -43,7 +43,6 @@ class JavascriptParser extends BaseParser {
   async writeModals() {
     const modals = this.modals;
     const modules = this.modules;
-    const meta = this.meta;
 
     modules.forEach((mod) => {
       const { rows } = mod;
@@ -55,7 +54,7 @@ class JavascriptParser extends BaseParser {
       const merged = { ...conf, isModal: true };
       const rst = this.renderFn(merged);
 
-      const out = path.join(conf.jsRoot, meta.pageName, 'modals', name);
+      const out = path.join(conf.jsRoot, this._getPagePath(), 'modals', name);
       this._writeFile(out, 'index.js', rst);
     });
   }

@@ -23,7 +23,7 @@ class EntryParser extends BaseParser {
     const merged = { ...meta, ...conf };
     const rst = this.renderFn(merged);
 
-    const out = path.join(conf.jsRoot, meta.pageName);
+    const out = path.join(conf.jsRoot, this._getPagePath());
     this._writeFile(out, 'entry.js', rst);
   }
 }

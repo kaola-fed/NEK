@@ -7,14 +7,6 @@ export default (Handlebars) => {
   Handlebars.registerHelper('model', function (context) { return `{${context}}`; });
   Handlebars.registerHelper('rules', function (context) { return `{rules.${context}}`; });
 
-  Handlebars.registerHelper('isBinding', function (key, options) {
-    const array = ['value', 'source'];
-    if (array.indexOf(key) != -1) {
-      return options.fn(this);
-    }
-    return options.inverse(this);
-  });
-
   Handlebars.registerHelper('json', function (context) {
     return JSON.stringify(context);
   });

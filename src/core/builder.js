@@ -18,18 +18,27 @@ class Builder {
    * 1. 从远端根据用户输入的k参数获取页面meta配置, meta中包含模板库的访问url;
    * 3. 取完后根据meta配置输出代码;
    */
-  async run() {
-    await this.getMeta();
+  async run(url) {
+    await this.getMeta(url);
     this.render();
   }
 
-  async getMeta() {
+  async getMeta(url) {
     console.log('开始获取页面配置数据...');
     try {
       const resp = await request('http://127.0.0.1:3000/projects/haitao/meta.json', { json: true });
 
       if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
-      this.meta = resp.meta || {};
+
+      if (url) {
+        this.meta = {
+          url,
+          rows: [],
+          templates: resp.meta.templates,
+        };
+      } else {
+        this.meta = resp.meta || {};
+      }
     } catch (err) {
       console.error('请求页面数据失败,请检查网络...');
       process.exit(1);
