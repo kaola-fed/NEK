@@ -1,7 +1,7 @@
 {
   "name": "nek",
-  "version": "1.1.4",
-  "description": "Nice easy Kaoka project toolkit.",
+  "version": "1.1.5-alpha.2",
+  "description": "Nice Easy Kaoka Project Toolkit.",
   "files": [
     "lib"
   ],
