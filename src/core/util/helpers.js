@@ -39,4 +39,11 @@ export default (Handlebars) => {
         return options.inverse(this);
     }
   });
+
+  Handlebars.registerHelper('macro', function (name, defaults) {
+    Handlebars.registerHelper(name, function (options) {
+      const e = { ...this, ...defaults.hash, ...options.hash };
+      return new Handlebars.SafeString(defaults.fn(e));
+    });
+  });
 };
