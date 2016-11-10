@@ -26,7 +26,7 @@ class Builder {
   async getMeta(url) {
     console.log('开始获取页面配置数据...');
     try {
-      const resp = await request('http://127.0.0.1:3000/projects/haitao/meta.json', { json: true });
+      const resp = await request('http://nek.kaolafed.com/project/haitao/meta.json', { json: true });
 
       if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
 
