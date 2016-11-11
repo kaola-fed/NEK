@@ -1,6 +1,7 @@
 import rc from 'rc';
 
 const config = rc('nek', {
+  projectId: 'haitao',
   webRoot: './src/main/webapp/backend',
   viewRoot: './src/main/webapp/backend/template',
   jsRoot: './src/main/webapp/backend/src/javascript/page/',

@@ -3,6 +3,7 @@ import path from 'path';
 
 import RouteDirective from './directives/route';
 import TemplateFactory from './templates/factory';
+import rc from './util/rc';
 /**
  * Builder类
  * @param key {String} - 工程+页面的唯一标识
@@ -38,7 +39,7 @@ class Builder {
   async getMeta(url) {
     console.log('开始获取页面配置数据...');
     try {
-      const resp = await request('http://nek.kaolafed.com/project/haitao/meta.json', { json: true });
+      const resp = await request(`http://nek.kaolafed.com/project/${rc.projectId}/meta.json`, { json: true });
 
       if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
 
