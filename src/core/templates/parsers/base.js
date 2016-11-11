@@ -6,8 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import mkdirp from 'mkdirp-promise';
 import request from 'request-promise';
-import UrlApi from 'url';
-import decamelize from 'decamelize';
+
 import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
 
@@ -72,23 +71,6 @@ class BaseParser {
     fs.writeFile(out, this.format(content));
 
     console.log(`Output File: ${out}`);
-  }
-
-  _getPagePath() {
-    const { url } = this.meta;
-
-    let pathname = UrlApi.parse(url).pathname;
-    pathname = pathname.replace(/(^\/?backend\/)|^\//, '');
-
-    const pathArray = pathname.split('/');
-    if (pathArray.length > 3) { throw new Error('[Error]url最多支持三级,请检查'); }
-
-    while (pathArray.length < 3) {
-      pathArray.push('index');
-    }
-
-    pathname = decamelize(pathArray.join('/'), '.');
-    return pathname;
   }
 
   async parse() {

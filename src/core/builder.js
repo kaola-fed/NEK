@@ -1,7 +1,8 @@
 import request from 'request-promise';
+import path from 'path';
 
+import RouteDirective from './directives/route';
 import TemplateFactory from './templates/factory';
-
 /**
  * Builder类
  * @param key {String} - 工程+页面的唯一标识
@@ -20,7 +21,18 @@ class Builder {
    */
   async run(url) {
     await this.getMeta(url);
+
+    this.updateRoute();
     this.render();
+  }
+
+  async updateRoute() {
+    const { url } = this.meta;
+    const cwd = process.cwd();
+    const mokyPath = path.join(cwd, 'moky.config.js');
+
+    const directive = new RouteDirective(mokyPath, url);
+    directive.update();
   }
 
   async getMeta(url) {

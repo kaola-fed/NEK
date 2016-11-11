@@ -3,11 +3,13 @@ import { js_beautify } from 'js-beautify';
 
 import BaseParser from './base';
 import conf from '../../util/rc';
+import Url2Path from '../../util/url2path';
 
 class JavascriptParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.javascript;
+    this.pageUrl = meta.url;
   }
 
   format(content) {
@@ -24,7 +26,7 @@ class JavascriptParser extends BaseParser {
     meta.modals = this.modals;
     const merged = { ...meta, ...conf, isPage: true };
     const rst = this.renderFn(merged);
-    const out = path.join(conf.jsRoot, this._getPagePath(), 'modules');
+    const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules');
 
     this._writeFile(out, 'page.js', rst);
   }
@@ -37,7 +39,7 @@ class JavascriptParser extends BaseParser {
       const modals = { modals: this.customs(rows, true) };
       const merged = { ...mod, ...modals, ...conf };
       const rst = this.renderFn(merged);
-      const out = path.join(conf.jsRoot, this._getPagePath(), 'modules', name);
+      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules', name);
 
       this._writeFile(out, 'index.js', rst);
     });
@@ -57,7 +59,7 @@ class JavascriptParser extends BaseParser {
       const merged = { ...conf, isModal: true };
       const rst = this.renderFn(merged);
 
-      const out = path.join(conf.jsRoot, this._getPagePath(), 'modals', name);
+      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modals', name);
       this._writeFile(out, 'index.js', rst);
     });
   }

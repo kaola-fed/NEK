@@ -2,46 +2,27 @@ import path from 'path';
 
 import BaseParser from './base';
 import conf from '../../util/rc';
+import Url2Path from '../../util/url2path';
 
 class FreeMarkerParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.freemarker;
+    this.pageUrl = meta.url;
   }
 
   format(content) {
     return content;
   }
 
-  /* ftl去除第三级路径 */
-  _getPagePath() {
-    let pagePath = super._getPagePath();
-    const pos = pagePath.lastIndexOf('/');
-    const name = pagePath.substring(pos + 1);
-
-    pagePath = pagePath.substring(0, pos);
-    return {
-      name,
-      path: pagePath,
-    };
-  }
-
-  extendMeta() {
-    const meta = this.meta;
-    meta.pageName = super._getPagePath();
-
-    return meta;
-  }
-
   async writePage() {
-    const meta = this.extendMeta();
+    const meta = this.meta;
+    const rst = this.renderFn({ ...meta, pageName: Url2Path.js(this.pageUrl) });
 
-    const rst = this.renderFn(meta);
+    const ftlPath = Url2Path.ftl(this.pageUrl);
+    const out = path.join(conf.viewRoot, ftlPath.path);
 
-    const pagePath = this._getPagePath();
-    const out = path.join(conf.viewRoot, pagePath.path);
-
-    this._writeFile(out, `${pagePath.name}.ftl`, rst);
+    this._writeFile(out, `${ftlPath.name}.ftl`, rst);
   }
 }
 

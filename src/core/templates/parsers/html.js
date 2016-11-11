@@ -8,11 +8,13 @@ import { html } from 'js-beautify';
 
 import BaseParser from './base';
 import conf from '../../util/rc';
+import Url2Path from '../../util/url2path';
 
 class HtmlParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.html;
+    this.pageUrl = meta.url;
   }
 
   format(content) {
@@ -22,7 +24,7 @@ class HtmlParser extends BaseParser {
   async writePage() {
     const meta = this.meta;
     const rst = this.renderFn(meta);
-    const out = path.join(conf.jsRoot, this._getPagePath(), 'modules');
+    const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules');
 
     this._writeFile(out, 'page.html', rst);
   }
@@ -32,7 +34,7 @@ class HtmlParser extends BaseParser {
     modules.forEach((mod) => {
       const { name } = mod;
       const rst = this.renderFn(mod);
-      const out = path.join(conf.jsRoot, this._getPagePath(), 'modules', name);
+      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules', name);
 
       this._writeFile(out, 'index.html', rst);
     });
@@ -53,7 +55,7 @@ class HtmlParser extends BaseParser {
       const { name } = modal;
       const rst = this.renderFn(modal);
 
-      const out = path.join(conf.jsRoot, this._getPagePath(), 'modals', name);
+      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modals', name);
       this._writeFile(out, 'index.html', rst);
     });
   }
