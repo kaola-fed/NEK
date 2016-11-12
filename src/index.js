@@ -10,4 +10,5 @@ yargs
   .commandDir('commands')
   .demand(1)
   .help()
+  .version()
   .argv;
