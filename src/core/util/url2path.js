@@ -21,6 +21,9 @@ export default {
     let pathname = this.pathname(url);
 
     const pathArray = pathname.split('/');
+    // 去除第一个/
+    pathArray.shift();
+
     if (pathArray.length > 3) { throw new Error('[Error]url最多支持三级,请检查'); }
 
     while (pathArray.length < 3) {

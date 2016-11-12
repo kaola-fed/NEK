@@ -13,7 +13,7 @@ class JavascriptParser extends BaseParser {
   }
 
   format(content) {
-    let out = js_beautify(content, { indent_size: 2 });
+    let out = js_beautify(content, { indent_size: 4 });
     out = out.replace(/\/\* beautify ignore:start \*\//gm, '');
     out = out.replace(/\/\* beautify ignore:end \*\//gm, '');
     out = out.replace(/^\s*[\r\n]/gm, '');
