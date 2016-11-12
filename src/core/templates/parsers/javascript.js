@@ -9,7 +9,7 @@ class JavascriptParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.javascript;
-    this.pageUrl = meta.url;
+    this.jsPath = Url2Path.js(meta.url);
   }
 
   format(content) {
@@ -26,7 +26,7 @@ class JavascriptParser extends BaseParser {
     meta.modals = this.modals;
     const merged = { ...meta, ...conf, isPage: true };
     const rst = this.renderFn(merged);
-    const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules');
+    const out = path.join(conf.jsRoot, this.jsPath, 'modules');
 
     this._writeFile(out, 'page.js', rst);
   }
@@ -39,7 +39,7 @@ class JavascriptParser extends BaseParser {
       const modals = { modals: this.customs(rows, true) };
       const merged = { ...mod, ...modals, ...conf };
       const rst = this.renderFn(merged);
-      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modules', name);
+      const out = path.join(conf.jsRoot, this.jsPath, 'modules', name);
 
       this._writeFile(out, 'index.js', rst);
     });
@@ -59,7 +59,7 @@ class JavascriptParser extends BaseParser {
       const merged = { ...conf, isModal: true };
       const rst = this.renderFn(merged);
 
-      const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl), 'modals', name);
+      const out = path.join(conf.jsRoot, this.jsPath, 'modals', name);
       this._writeFile(out, 'index.js', rst);
     });
   }

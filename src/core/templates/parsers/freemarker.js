@@ -8,7 +8,7 @@ class FreeMarkerParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.freemarker;
-    this.pageUrl = meta.url;
+    this.pagePath = Url2Path.ftl(meta.url);
   }
 
   format(content) {
@@ -17,10 +17,10 @@ class FreeMarkerParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
-    const rst = this.renderFn({ ...meta, pageName: Url2Path.js(this.pageUrl) });
+    const rst = this.renderFn({ ...meta, pageName: Url2Path.js(meta.url) });
 
-    const ftlPath = Url2Path.ftl(this.pageUrl);
-    const out = path.join(conf.viewRoot, ftlPath.path);
+    const ftlPath = this.pagePath;
+    const out = path.join(conf.pageRoot, ftlPath.path);
 
     this._writeFile(out, `${ftlPath.name}.ftl`, rst);
   }

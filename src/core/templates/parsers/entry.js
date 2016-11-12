@@ -12,11 +12,12 @@ class EntryParser extends BaseParser {
   constructor(meta) {
     super(meta);
     this.templateUrl = meta.templates.entry;
-    this.pageUrl = meta.url;
+
+    this.entryPath = Url2Path.js(meta.url);
   }
 
   format(content) {
-    const out = js_beautify(content, { indent_size: 2 });
+    const out = js_beautify(content, { indent_size: 4 });
     return out;
   }
 
@@ -25,7 +26,7 @@ class EntryParser extends BaseParser {
     const merged = { ...meta, ...conf };
     const rst = this.renderFn(merged);
 
-    const out = path.join(conf.jsRoot, Url2Path.js(this.pageUrl));
+    const out = path.join(conf.jsRoot, this.entryPath);
     this._writeFile(out, 'entry.js', rst);
   }
 }

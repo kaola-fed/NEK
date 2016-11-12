@@ -15,13 +15,8 @@ class RouteDirective extends BaseDirective {
     this.pathname = Url2Path.pathname(url);
     let ftlPath = Url2Path.ftl(url);
     ftlPath = `/${ftlPath.path}/${ftlPath.name}`;
-    ftlPath = path.join(this.getViewName(), ftlPath);
+    ftlPath = path.join(rc.pageRootName, ftlPath);
     this.route = `'${this.pathname}': '${ftlPath}'`;
-  }
-
-  getViewName() {
-    const viewRoot = rc.viewRoot;
-    return path.basename(viewRoot);
   }
 
   validate(routes) {

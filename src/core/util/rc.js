@@ -2,8 +2,9 @@ import rc from 'rc';
 
 const config = rc('nek', {
   projectId: 'haitao',
-  webRoot: './src/main/webapp/backend',
-  viewRoot: './src/main/webapp/backend/template',
+  urlReplace: '',
+  pageRoot: './src/main/webapp/backend/template',
+  pageRootName: '',
   jsRoot: './src/main/webapp/backend/src/javascript/page/',
   BaseComponent: 'pro/widget/BaseComponent',
   ListComponent: 'pro/components/ListComponent',

@@ -4,6 +4,7 @@
  */
 import URL from 'url';
 import decamelize from 'decamelize';
+import rc from './rc';
 
 export default {
   ftl(url) {
@@ -18,6 +19,11 @@ export default {
     };
   },
   js(url) {
+    if (rc.urlReplace) {
+      const regexp = new RegExp(rc.urlReplace);
+      url = url.replace(regexp, ''); // eslint-disable-line no-param-reassign
+    }
+
     let pathname = this.pathname(url);
 
     const pathArray = pathname.split('/');

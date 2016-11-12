@@ -1,7 +1,8 @@
 {
-    "projectId":"xxx",
-    "webRoot":"./src/main/webapp/backend",
-    "viewRoot":"./src/main/webapp/backend/template/page",
+    "projectId":"haitao",
+    "urlReplace": "/backend",
+    "pageRoot":"./src/main/webapp/backend/template/page",
+    "pageRootName":"page",
     "jsRoot":"./src/main/webapp/backend/src/javascript/page/",
     "BaseComponent":"pro/widget/BaseComponent",
     "ListComponent":"pro/components/ListComponent",
