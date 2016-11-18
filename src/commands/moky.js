@@ -18,11 +18,20 @@ exports.builder = {
     default: 'moky.config.js',
     describe: 'Debug env, see <proxyMaps> in configure file',
   },
+  V: {
+    alias: 'verbose',
+    demand: false,
+    default: false,
+    describe: 'Show detail log',
+  },
 };
 
 exports.handler = async (argv) => {
   const { env, config } = argv;
   const options = parseConfig(path.resolve(config));
   options.env = env;
+  if (argv.verbose) {
+    options.verbose = argv.verbose;
+  }
   moky(options);
 };
