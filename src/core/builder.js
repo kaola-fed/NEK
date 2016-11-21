@@ -39,7 +39,7 @@ class Builder {
   async getMeta(url) {
     console.log('开始获取页面配置数据...');
     try {
-      const resp = await request(`http://nek.kaolafed.com/project/${rc.projectId}/meta.json`, { json: true });
+      const resp = await request(`${rc.api}/project?project=${rc.projectId}`, { json: true });
 
       if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
 

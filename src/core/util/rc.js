@@ -9,6 +9,7 @@ const config = rc('nek', {
   BaseComponent: 'pro/widget/BaseComponent',
   ListComponent: 'pro/components/ListComponent',
   BaseModal: 'pro/components/modal/modal',
+  api: 'http://nek.kaolafed.com/api',
 });
 
 export default config;

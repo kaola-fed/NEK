@@ -8,7 +8,7 @@ import Url2Path from '../../util/url2path';
 class JavascriptParser extends BaseParser {
   constructor(meta) {
     super(meta);
-    this.templateUrl = meta.templates.javascript;
+    this.template = meta.templates.javascript;
     this.jsPath = Url2Path.js(meta.url);
   }
 

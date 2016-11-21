@@ -13,7 +13,7 @@ import Url2Path from '../../util/url2path';
 class HtmlParser extends BaseParser {
   constructor(meta) {
     super(meta);
-    this.templateUrl = meta.templates.html;
+    this.template = meta.templates.html;
     this.jsPath = Url2Path.js(meta.url);
   }
 

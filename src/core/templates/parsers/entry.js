@@ -11,7 +11,7 @@ import Url2Path from '../../util/url2path';
 class EntryParser extends BaseParser {
   constructor(meta) {
     super(meta);
-    this.templateUrl = meta.templates.entry;
+    this.template = meta.templates.entry;
 
     this.entryPath = Url2Path.js(meta.url);
   }

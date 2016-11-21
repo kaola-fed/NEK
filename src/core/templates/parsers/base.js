@@ -9,6 +9,7 @@ import request from 'request-promise';
 
 import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
+import rc from '../../util/rc';
 
 class BaseParser {
   constructor(meta) {
@@ -53,9 +54,11 @@ class BaseParser {
   format(content) { return content; }
 
   async loadTemplate() {
-    console.log(`template: ${this.templateUrl}`);
+    const { file, name } = this.template;
+    const templateUrl = `${rc.api}/template?file=${file}&name=${name}`;
+    console.log(`template: ${templateUrl}`);
     try {
-      const source = await request(this.templateUrl);
+      const source = await request(templateUrl);
       this.renderFn = Handlebars.compile(source, { noEscape: true });
     } catch (e) {
       console.error('模板文件请求失败,请检查...');
