@@ -23,6 +23,7 @@ class HtmlParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
+    meta.rows = meta.data.rows;
     const rst = this.renderFn(meta);
     const out = path.join(conf.jsRoot, this.jsPath, 'modules');
 

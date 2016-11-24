@@ -1,7 +1,7 @@
 import rc from 'rc';
 
 const config = rc('nek', {
-  projectId: 'haitao',
+  projectId: '582ec571bfc09908e38b79dd',
   urlReplace: '',
   pageRoot: './src/main/webapp/backend/template',
   pageRootName: '',

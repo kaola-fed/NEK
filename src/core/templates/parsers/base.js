@@ -25,7 +25,7 @@ class BaseParser {
   get modules() {
     if (this._modules) return this._modules;
     if (!this.meta) return null;
-    const { rows } = this.meta;
+    const { rows } = this.meta.data;
     return this.customs(rows, false);
   }
 
@@ -34,7 +34,7 @@ class BaseParser {
   get modals() {
     if (this._modals) return this._modals;
     if (!this.meta) return [];
-    const { rows } = this.meta;
+    const { rows } = this.meta.data;
     return this.customs(rows, true);
   }
 
@@ -72,7 +72,7 @@ class BaseParser {
     if (fs.existsSync(out)) { return console.warn(`Exist File: ${out}`); }
 
     await mkdirp(dir);
-    fs.writeFile(out, this.format(content));
+    fs.writeFile(out, this.format(content), () => {});
 
     console.log(`Output File: ${out}`);
   }

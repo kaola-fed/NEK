@@ -39,18 +39,16 @@ class Builder {
   async getMeta(url) {
     console.log('开始获取页面配置数据...');
     try {
-      const resp = await request(`${rc.api}/project?project=${rc.projectId}`, { json: true });
-
-      if (resp.code !== 200) { throw new Error(`[error] - ${resp.message}`); }
+      const resp = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
 
       if (url) {
         this.meta = {
           url,
           rows: [],
-          templates: resp.meta.templates,
+          templates: resp.templates,
         };
       } else {
-        this.meta = resp.meta || {};
+        this.meta = resp || {};
       }
     } catch (err) {
       console.error('请求页面数据失败,请检查网络...');
