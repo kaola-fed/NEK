@@ -44,7 +44,9 @@ class Builder {
       if (url) {
         this.meta = {
           url,
-          rows: [],
+          data: {
+            rows: [],
+          },
           templates: resp.templates,
         };
       } else {
