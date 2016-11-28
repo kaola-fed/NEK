@@ -11,7 +11,7 @@ import rc from './util/rc';
  */
 class Builder {
   constructor(key) {
-    this.key = key;
+    this.key = key || '';
     this.meta = null;
   }
 
@@ -51,6 +51,7 @@ class Builder {
         this.meta = resp || {};
       }
     } catch (err) {
+      console.error(err);
       console.error('请求页面数据失败,请检查网络...');
       process.exit(1);
     }
