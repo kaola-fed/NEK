@@ -37,20 +37,25 @@ class Builder {
   }
 
   async getMeta(url) {
-    console.log('开始获取页面配置数据...');
     try {
-      const resp = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
-
+      console.log('开始获取项目模板文件...');
+      const project = await request(`${rc.api}/project?project=${rc.projectId}`, { json: true });
+      console.log('开始获取页面配置数据...');
+      const page = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
+      const templates = project.templates.reduce((r, d) => {
+        r[d.type] = `${rc.api}/template?file=${d.file}&name=${d.name}`;
+        return r;
+      }, {});
       if (url) {
         this.meta = {
           url,
           data: {
             rows: [],
           },
-          templates: resp.templates,
+          templates,
         };
       } else {
-        this.meta = resp || {};
+        this.meta = page || {};
       }
     } catch (err) {
       console.error(err);

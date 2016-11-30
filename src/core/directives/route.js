@@ -1,5 +1,4 @@
 import { js_beautify } from 'js-beautify';
-import path from 'path';
 
 import BaseDirective from './base';
 import Url2Path from '../util/url2path';
