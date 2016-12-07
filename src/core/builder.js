@@ -36,22 +36,27 @@ class Builder {
     directive.update();
   }
 
-  async getMeta(url) {
-    console.log('开始获取页面配置数据...');
+  async getMeta(url = '') {
     try {
-      const resp = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
+      console.log('开始获取项目模板文件...');
+      const project = await request(`${rc.api}/project?project=${rc.projectId}`, { json: true });
+      const templates = project.templates.reduce((r, d) => {
+        r[d.type] = `${rc.api}/template?file=${d.file}&name=${d.name}`;
+        return r;
+      }, {});
 
-      if (url) {
-        this.meta = {
-          url,
-          data: {
-            rows: [],
-          },
-          templates: resp.templates,
-        };
-      } else {
-        this.meta = resp || {};
+      let page = {};
+      if (this.key) {
+        console.log('开始获取页面配置数据...');
+        page = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
       }
+      this.meta = Object.assign({
+        url,
+        data: {
+          rows: [],
+        },
+        templates,
+      }, page);
     } catch (err) {
       console.error(err);
       console.error('请求页面数据失败,请检查网络...');
