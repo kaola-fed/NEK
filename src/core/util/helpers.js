@@ -16,15 +16,15 @@ export default (Handlebars) => {
     return `${name}Modal`;
   });
 
-  Handlebars.registerHelper('ifAllCustoms', function (rows) {
+  Handlebars.registerHelper('ifAllCustoms', function (rows, condition, options) {
     let flag = false;
     rows.forEach(function (row) {
       const { components } = row;
-      if (components.length > 1 || components[0].id === 0) {
+      if (components.length && components[0].id == 0) {
         flag = true;
       }
     });
-    return flag;
+    return flag == condition ? options.fn(this) : options.inverse(this);
   });
 
   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {

@@ -25,7 +25,7 @@ class BaseParser {
     if (this._modules) return this._modules;
     if (!this.meta) return null;
     const { rows } = this.meta.data;
-    return this.customs(rows, false);
+    return this.getModules(rows);
   }
 
   set modals(modals) { this._modals = modals; }
@@ -33,18 +33,18 @@ class BaseParser {
   get modals() {
     if (this._modals) return this._modals;
     if (!this.meta) return [];
-    const { rows } = this.meta.data;
-    return this.customs(rows, true);
+    const { modals } = this.meta.data;
+    return modals;
   }
 
-  customs(rows, flag) {
+  getModules(rows) {
     if (!rows) { return []; }
 
     const array = [];
     rows.forEach((row) => {
       const { components } = row;
       array.push(...components.filter(component =>
-        component.id === 0 && !!component.modal === flag
+        component.id === 0
       ));
     });
     return array;

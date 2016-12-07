@@ -35,9 +35,9 @@ class JavascriptParser extends BaseParser {
     const modules = this.modules;
 
     modules.forEach((mod) => {
-      const { name, rows } = mod;
-      const modals = { modals: this.customs(rows, true) };
-      const merged = { ...mod, ...modals, ...conf };
+      const { name } = mod;
+      const cloneConf = { ...conf, name: '' };
+      const merged = { ...cloneConf, ...mod };
       const rst = this.renderFn(merged);
       const out = path.join(conf.jsRoot, this.jsPath, 'modules', name);
 
@@ -47,17 +47,11 @@ class JavascriptParser extends BaseParser {
 
   async writeModals() {
     const modals = this.modals;
-    const modules = this.modules;
-
-    modules.forEach((mod) => {
-      const { rows } = mod;
-      modals.push(...this.customs(rows, true));
-    });
 
     modals.forEach((modal) => {
       const { name } = modal;
-      const merged = { ...conf, isModal: true };
-      const rst = this.renderFn(merged);
+      const cloneConf = { ...conf, name: '' };
+      const rst = this.renderFn({ ...cloneConf, isModal: true });
 
       const out = path.join(conf.jsRoot, this.jsPath, 'modals', name);
       this._writeFile(out, 'index.js', rst);

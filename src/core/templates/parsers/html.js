@@ -43,14 +43,6 @@ class HtmlParser extends BaseParser {
 
   async writeModals() {
     const modals = this.modals;
-    const modules = this.modules;
-
-    modules.forEach((mod) => {
-      const { rows } = mod;
-      if (rows && rows.length) {
-        modals.push(...this.customs(rows, true));
-      }
-    });
 
     modals.forEach((modal) => {
       const { name } = modal;
