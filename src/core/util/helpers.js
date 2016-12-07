@@ -16,6 +16,17 @@ export default (Handlebars) => {
     return `${name}Modal`;
   });
 
+  Handlebars.registerHelper('ifAllCustoms', function (rows) {
+    let flag = false;
+    rows.forEach(function (row) {
+      const { components } = row;
+      if (components.length > 1 || components[0].id === 0) {
+        flag = true;
+      }
+    });
+    return flag;
+  });
+
   Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
     switch (operator) {
       case '==':
