@@ -31,7 +31,7 @@ class HtmlParser extends BaseParser {
   }
 
   async writeModules() {
-    const modules = this.modules;
+    const modules = this.modules || [];
     modules.forEach((mod) => {
       const { name } = mod;
       const rst = this.renderFn(mod);
@@ -42,7 +42,7 @@ class HtmlParser extends BaseParser {
   }
 
   async writeModals() {
-    const modals = this.modals;
+    const modals = this.modals || [];
 
     modals.forEach((modal) => {
       const { name } = modal;

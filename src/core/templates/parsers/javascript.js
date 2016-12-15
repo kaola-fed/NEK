@@ -32,7 +32,7 @@ class JavascriptParser extends BaseParser {
   }
 
   async writeModules() {
-    const modules = this.modules;
+    const modules = this.modules || [];
 
     modules.forEach((mod) => {
       const { name } = mod;
@@ -46,7 +46,7 @@ class JavascriptParser extends BaseParser {
   }
 
   async writeModals() {
-    const modals = this.modals;
+    const modals = this.modals || [];
 
     modals.forEach((modal) => {
       const { name } = modal;
