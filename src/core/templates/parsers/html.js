@@ -11,8 +11,8 @@ import conf from '../../util/rc';
 import Url2Path from '../../util/url2path';
 
 class HtmlParser extends BaseParser {
-  constructor(meta) {
-    super(meta);
+  constructor(meta, force) {
+    super(meta, force);
     this.template = meta.templates.html;
     this.jsPath = Url2Path.js(meta.url);
   }

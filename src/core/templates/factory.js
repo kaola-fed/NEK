@@ -5,15 +5,15 @@ import EntryParser from './parsers/entry';
 
 class TemplateFactory {
 
-  static create(type, meta) {
+  static create(type, meta, force) {
     if (type === 'freemarker') {
-      return new FreeMarkerParser(meta);
+      return new FreeMarkerParser(meta, force);
     } else if (type === 'html') {
-      return new HtmlParser(meta);
+      return new HtmlParser(meta, force);
     } else if (type === 'entry') {
-      return new EntryParser(meta);
+      return new EntryParser(meta, force);
     }
-    return new JavascriptParser(meta);
+    return new JavascriptParser(meta, force);
   }
 }
 
