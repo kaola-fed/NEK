@@ -23,9 +23,9 @@ class BaseParser {
 
   get modules() {
     if (this._modules) return this._modules;
-    if (!this.meta) return null;
+    if (!this.meta) return [];
     const { rows } = this.meta.data;
-    return this.getModules(rows);
+    return this.getModules(rows) || [];
   }
 
   set modals(modals) { this._modals = modals; }
@@ -34,7 +34,7 @@ class BaseParser {
     if (this._modals) return this._modals;
     if (!this.meta) return [];
     const { modals } = this.meta.data;
-    return modals;
+    return modals || [];
   }
 
   getModules(rows) {

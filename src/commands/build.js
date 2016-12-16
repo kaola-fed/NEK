@@ -2,7 +2,7 @@ import Builder from '../core/builder';
 
 exports.command = 'build [options]';
 
-exports.desc = 'Build a new page';
+exports.desc = 'Build New Page';
 
 exports.builder = {
   k: {
