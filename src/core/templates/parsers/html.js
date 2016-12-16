@@ -11,8 +11,8 @@ import conf from '../../util/rc';
 import Url2Path from '../../util/url2path';
 
 class HtmlParser extends BaseParser {
-  constructor(meta) {
-    super(meta);
+  constructor(meta, force) {
+    super(meta, force);
     this.template = meta.templates.html;
     this.jsPath = Url2Path.js(meta.url);
   }
@@ -31,7 +31,7 @@ class HtmlParser extends BaseParser {
   }
 
   async writeModules() {
-    const modules = this.modules;
+    const modules = this.modules || [];
     modules.forEach((mod) => {
       const { name } = mod;
       const rst = this.renderFn(mod);
@@ -42,7 +42,7 @@ class HtmlParser extends BaseParser {
   }
 
   async writeModals() {
-    const modals = this.modals;
+    const modals = this.modals || [];
 
     modals.forEach((modal) => {
       const { name } = modal;

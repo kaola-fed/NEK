@@ -11,8 +11,9 @@ import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
 
 class BaseParser {
-  constructor(meta) {
+  constructor(meta, force = false) {
     this.meta = meta;
+    this.force = force;
     this._modules = null;
     this._modals = null;
 
@@ -65,8 +66,8 @@ class BaseParser {
 
   async _writeFile(dir, filename, content) {
     const out = path.join(dir, filename);
-
-    if (fs.existsSync(out)) { return console.warn(`Exist File: ${out}`); }
+    if (fs.existsSync(out) && !this.force) { return console.warn(`Exist File: ${out}`); }
+    if (this.force) { console.warn(`Force write: ${out}`); }
 
     await mkdirp(dir);
     fs.writeFile(out, this.format(content), () => {});

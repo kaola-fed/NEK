@@ -5,8 +5,8 @@ import conf from '../../util/rc';
 import Url2Path from '../../util/url2path';
 
 class FreeMarkerParser extends BaseParser {
-  constructor(meta) {
-    super(meta);
+  constructor(meta, force) {
+    super(meta, force);
     this.template = meta.templates.freemarker;
     this.pagePath = Url2Path.ftl(meta.url);
   }

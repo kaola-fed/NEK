@@ -16,7 +16,7 @@ export default (Handlebars) => {
     return `${name}Modal`;
   });
 
-  Handlebars.registerHelper('ifAllCustoms', function (rows, condition, options) {
+  Handlebars.registerHelper('ifAllCustoms', function (rows = [], condition, options) {
     let flag = false;
     rows.forEach(function (row) {
       const { components } = row;

@@ -10,8 +10,9 @@ import rc from './util/rc';
  * @param meta {Object} - 从远端获取到的页面配置对象, 包括js, html, ftl等文件的模板路径
  */
 class Builder {
-  constructor(key) {
-    this.key = key || '';
+  constructor(key = '', force = false) {
+    this.key = key;
+    this.force = force;
     this.meta = null;
   }
 
@@ -66,7 +67,7 @@ class Builder {
 
   render() {
     ['entry', 'freemarker', 'javascript', 'html'].forEach((type) => {
-      const parser = TemplateFactory.create(type, this.meta);
+      const parser = TemplateFactory.create(type, this.meta, this.force);
       parser.parse();
     }, this);
   }

@@ -9,8 +9,8 @@ import Url2Path from '../../util/url2path';
  * 页面nej入口文件entry.js解析
  */
 class EntryParser extends BaseParser {
-  constructor(meta) {
-    super(meta);
+  constructor(meta, force) {
+    super(meta, force);
     this.template = meta.templates.entry;
 
     this.entryPath = Url2Path.js(meta.url);
