@@ -18,6 +18,12 @@ exports.builder = {
     default: 'moky.config.js',
     describe: 'Debug env, see <proxyMaps> in configure file',
   },
+  n: {
+    alias: 'new',
+    demand: false,
+    default: false,
+    describe: 'Auto create mock file if not exists',
+  },
   V: {
     alias: 'verbose',
     demand: false,
@@ -32,6 +38,9 @@ exports.handler = async (argv) => {
   options.env = env;
   if (argv.verbose) {
     options.verbose = argv.verbose;
+  }
+  if (argv.new) {
+    options.autoGenMock = argv.new;
   }
   moky(options);
 };
