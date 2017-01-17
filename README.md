@@ -18,7 +18,7 @@ NEK 的配置需要在项目的前端根目录创建一个名为 `.nekrc` 的文
     "urlReplace": "目前目录是基于 URL 结构生成的，这个选项表示去除冗余的 URL 前缀",
     "pageRoot": "静态文件目录",
     "jsRoot": "JS 根目录",
-    "RouteMap": "moky urlMaps 路径，可选",
+    "urlMaps": "moky urlMaps 路径，可选",
     "BaseComponent": "基础组件路径（NEJ 路径，下同）",
     "ListComponent": "列表组件路径",
     "BaseModal": "基础模态框路径"

@@ -31,7 +31,7 @@ class Builder {
   async updateRoute() {
     const { url } = this.meta;
     const cwd = process.cwd();
-    const mokyPath = path.resolve(cwd, rc.RouteMap || 'moky.config.js');
+    const mokyPath = path.resolve(cwd, rc.urlMaps || 'moky.config.js');
 
     const directive = new RouteDirective(mokyPath, url);
     directive.update();
