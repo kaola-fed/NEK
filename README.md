@@ -5,7 +5,7 @@
 Nice easy Kaola project toolkit
 
 ## 基本介绍
-NEK 是考拉前端提高开发效率开发的一个脚手架工具链，主要是为了统一后台前端规范、减少写重复代码、以及方便离线调试。总共包括三个部分：nek-cli（即本工程），nek-ui，nek-server。其中三者的关系可以简单用下图表示：
+NEK 是考拉前端提高开发效率开发的一个脚手架工具链，主要是为了统一后台前端规范、减少写重复代码、以及方便离线调试。总共包括三个部分：nek-cli（即本工程），[nek-ui](https://github.com/kaola-fed/nek-ui)，[nek-server](https://github.com/kaola-fed/nek-server)。其中三者的关系可以简单用下图表示：
 
 ![](https://cdn.int64ago.org/dttms37fojiv7jtixdpldi.PNG)
 
