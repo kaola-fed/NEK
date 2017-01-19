@@ -33,14 +33,9 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  const { env, config } = argv;
-  const options = parseConfig(path.resolve(config));
-  options.env = env;
-  if (argv.verbose) {
-    options.verbose = argv.verbose;
-  }
-  if (argv.new) {
-    options.autoGenMock = argv.new;
-  }
+  const { env, verbose, new: autoGenMock } = argv;
+  const options = parseConfig(path.resolve(argv.c));
+  Object.assign(options, { env, verbose, autoGenMock });
+
   moky(options);
 };
