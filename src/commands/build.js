@@ -1,4 +1,7 @@
+import Logger from 'chalklog';
 import Builder from '../core/builder';
+
+const log = new Logger('nek');
 
 exports.command = 'build [options]';
 
@@ -32,6 +35,6 @@ exports.handler = async (argv) => {
     const builder = new Builder(key, force);
     builder.run(url);
   } catch (error) {
-    console.error(error);
+    log.red(error);
   }
 };

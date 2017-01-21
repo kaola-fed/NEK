@@ -4,11 +4,14 @@
  */
 import fs from 'fs';
 import path from 'path';
+import Logger from 'chalklog';
 import mkdirp from 'mkdirp-promise';
 import request from 'request-promise';
 
 import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
+
+const log = new Logger('nek');
 
 class BaseParser {
   constructor(meta, force = false) {
@@ -54,25 +57,25 @@ class BaseParser {
   format(content) { return content; }
 
   async loadTemplate() {
-    console.log(`template: ${this.template}`);
+    log.cyan(`template: ${this.template}`);
     try {
       const source = await request(this.template);
       this.renderFn = Handlebars.compile(source, { noEscape: true });
     } catch (e) {
-      console.error('模板文件请求失败,请检查...');
+      log.red('模板文件请求失败,请检查...');
       process.exit(1);
     }
   }
 
   async _writeFile(dir, filename, content) {
     const out = path.join(dir, filename);
-    if (fs.existsSync(out) && !this.force) { return console.warn(`Exist File: ${out}`); }
-    if (this.force) { console.warn(`Force write: ${out}`); }
+    if (fs.existsSync(out) && !this.force) { return log.yellow(`Exist File: ${out}`); }
+    if (this.force) { log.yellow(`Force write: ${out}`); }
 
     await mkdirp(dir);
     fs.writeFile(out, this.format(content), () => {});
 
-    console.log(`Output File: ${out}`);
+    log.cyan(`Output File: ${out}`);
   }
 
   async parse() {

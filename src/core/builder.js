@@ -1,9 +1,13 @@
 import request from 'request-promise';
+import Logger from 'chalklog';
 import path from 'path';
 
 import RouteDirective from './directives/route';
 import TemplateFactory from './templates/factory';
 import rc from './util/rc';
+
+const log = new Logger('nek');
+
 /**
  * Builder类
  * @param key {String} - 工程+页面的唯一标识
@@ -39,7 +43,7 @@ class Builder {
 
   async getMeta(url = '') {
     try {
-      console.log('开始获取项目模板文件...');
+      log.cyan('开始获取项目模板文件...');
       const project = await request(`${rc.api}/project?project=${rc.projectId}`, { json: true });
       const templates = project.templates.reduce((r, d) => {
         r[d.type] = `${rc.api}/template?file=${d.file}&name=${d.name}`;
@@ -48,7 +52,7 @@ class Builder {
 
       let page = {};
       if (this.key) {
-        console.log('开始获取页面配置数据...');
+        log.cyan('开始获取页面配置数据...');
         page = await request(`${rc.api}/page?project=${rc.projectId}&page=${this.key}`, { json: true });
       }
       this.meta = Object.assign({
@@ -59,8 +63,8 @@ class Builder {
         templates,
       }, page);
     } catch (err) {
-      console.error(err);
-      console.error('请求页面数据失败,请检查网络...');
+      log.red(err);
+      log.red('请求页面数据失败,请检查网络...');
       process.exit(1);
     }
   }
