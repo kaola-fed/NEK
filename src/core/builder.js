@@ -1,12 +1,10 @@
 import request from 'request-promise';
-import Logger from 'chalklog';
 import path from 'path';
 
 import RouteDirective from './directives/route';
 import TemplateFactory from './templates/factory';
 import rc from './util/rc';
-
-const log = new Logger('nek');
+import log from './util/log';
 
 /**
  * Builder类

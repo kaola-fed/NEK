@@ -1,11 +1,9 @@
 import { js_beautify } from 'js-beautify';
-import Logger from 'chalklog';
 
 import BaseDirective from './base';
 import Url2Path from '../util/url2path';
 import rc from '../util/rc';
-
-const log = new Logger('nek');
+import log from '../util/log';
 
 class RouteDirective extends BaseDirective {
   constructor(filePath, url) {

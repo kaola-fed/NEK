@@ -1,7 +1,5 @@
-import Logger from 'chalklog';
 import Builder from '../core/builder';
-
-const log = new Logger('nek');
+import log from '../core/util/log';
 
 exports.command = 'build [options]';
 

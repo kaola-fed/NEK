@@ -4,14 +4,12 @@
  */
 import fs from 'fs';
 import path from 'path';
-import Logger from 'chalklog';
 import mkdirp from 'mkdirp-promise';
 import request from 'request-promise';
 
 import Handlebars from 'handlebars';
 import helpers from '../../util/helpers';
-
-const log = new Logger('nek');
+import log from '../../util/log';
 
 class BaseParser {
   constructor(meta, force = false) {
