@@ -25,7 +25,7 @@ exports.builder = {
     describe: 'Auto create mock file if not exists',
   },
   r: {
-    alias: 'write',
+    alias: 'rewrite',
     demand: false,
     default: 0,
     describe: 'Write proxy data to mock file (1-write if not exist, 2-write even if exist)',
@@ -39,9 +39,9 @@ exports.builder = {
 };
 
 exports.handler = async (argv) => {
-  const { env, verbose, write, new: autoGenMock } = argv;
+  const { env, verbose, rewrite, new: autoGenMock } = argv;
   const options = parseConfig(path.resolve(argv.c));
-  Object.assign(options, { env, verbose, write, autoGenMock });
+  Object.assign(options, { env, verbose, rewrite, autoGenMock });
 
   moky(options);
 };
