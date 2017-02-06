@@ -9,7 +9,7 @@ exports.builder = {
   e: {
     alias: 'env',
     demand: false,
-    default: 'mock',
+    default: false,
     describe: 'Unique id mapped the project and the page configuration json object',
   },
   c: {
