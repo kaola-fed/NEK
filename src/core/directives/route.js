@@ -1,9 +1,9 @@
-import { js_beautify } from 'js-beautify';
+const { js_beautify } = require('js-beautify');
 
-import BaseDirective from './base';
-import Url2Path from '../util/url2path';
-import rc from '../util/rc';
-import log from '../util/log';
+const BaseDirective = require('./base');
+const Url2Path = require('../util/url2path');
+const rc = require('../util/rc');
+const log = require('../util/log');
 
 class RouteDirective extends BaseDirective {
   constructor(filePath, url) {
@@ -49,4 +49,4 @@ class RouteDirective extends BaseDirective {
   }
 }
 
-export default RouteDirective;
+module.exports = RouteDirective;

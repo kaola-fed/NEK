@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 /* eslint no-unused-expressions: 0 */
 
-import yargs from 'yargs';
+const yargs = require('yargs');
 
 yargs
   .commandDir('commands')

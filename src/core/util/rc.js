@@ -1,4 +1,4 @@
-import rc from 'rc';
+const rc = require('rc');
 
 const config = rc('nek', {
   projectId: '582ec571bfc09908e38b79dd',
@@ -13,4 +13,4 @@ const config = rc('nek', {
   api: 'http://nek.kaolafed.com/api',
 });
 
-export default config;
+module.exports = config;

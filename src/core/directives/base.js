@@ -1,4 +1,4 @@
-import fs from 'fs';
+const fs = require('fs');
 
 class BaseDirective {
   constructor(filepath) {
@@ -28,4 +28,4 @@ class BaseDirective {
   }
 }
 
-export default BaseDirective;
+module.exports = BaseDirective;

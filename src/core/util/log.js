@@ -1,3 +1,3 @@
-import Logger from 'chalklog';
+const Logger = require('chalklog');
 
-export default new Logger('nek');
+module.exports = new Logger('nek');

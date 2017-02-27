@@ -1,8 +1,8 @@
-import path from 'path';
+const path = require('path');
 
-import BaseParser from './base';
-import conf from '../../util/rc';
-import Url2Path from '../../util/url2path';
+const BaseParser = require('./base');
+const conf = require('../../util/rc');
+const Url2Path = require('../../util/url2path');
 
 class FreeMarkerParser extends BaseParser {
   constructor(meta, force) {
@@ -17,7 +17,7 @@ class FreeMarkerParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
-    const rst = this.renderFn({ ...meta, pageName: Url2Path.js(meta.url) });
+    const rst = this.renderFn(Object.assign({}, meta, { pageName: Url2Path.js(meta.url) }));
 
     const ftlPath = this.pagePath;
     const out = path.join(conf.pageRoot, ftlPath.path);
@@ -26,4 +26,4 @@ class FreeMarkerParser extends BaseParser {
   }
 }
 
-export default FreeMarkerParser;
+module.exports = FreeMarkerParser;

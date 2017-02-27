@@ -3,12 +3,12 @@
  * 1. writePage: 输出{jsRoot}/{pageName}/page.html, 其中jsRoot是从.nekrc中读取的, pageName是从meta中读取的;
  * 2. writeModules: 输出{jsRoot}/{pageName}/modules/{moduleName}/index.html, 其中moduleName是从meta中读取的;
  */
-import path from 'path';
-import { html } from 'js-beautify';
+const path = require('path');
+const { html } = require('js-beautify');
 
-import BaseParser from './base';
-import conf from '../../util/rc';
-import Url2Path from '../../util/url2path';
+const BaseParser = require('./base');
+const conf = require('../../util/rc');
+const Url2Path = require('../../util/url2path');
 
 class HtmlParser extends BaseParser {
   constructor(meta, force) {
@@ -54,4 +54,4 @@ class HtmlParser extends BaseParser {
   }
 }
 
-export default HtmlParser;
+module.exports = HtmlParser;

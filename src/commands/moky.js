@@ -1,4 +1,4 @@
-import { builder, handler } from 'moky';
+const { builder, handler } = require('moky');
 
 exports.command = 'moky [options]';
 

@@ -1,9 +1,9 @@
-import path from 'path';
-import { js_beautify } from 'js-beautify';
+const path = require('path');
+const { js_beautify } = require('js-beautify');
 
-import BaseParser from './base';
-import conf from '../../util/rc';
-import Url2Path from '../../util/url2path';
+const BaseParser = require('./base');
+const conf = require('../../util/rc');
+const Url2Path = require('../../util/url2path');
 
 class JavascriptParser extends BaseParser {
   constructor(meta, force) {
@@ -24,7 +24,7 @@ class JavascriptParser extends BaseParser {
     const meta = this.meta;
     meta.modules = this.modules;
     meta.modals = this.modals;
-    const merged = { ...meta, ...conf, isPage: true };
+    const merged = Object.assign({}, meta, conf, { isPage: true });
     const rst = this.renderFn(merged);
     const out = path.join(conf.jsRoot, this.jsPath, 'modules');
 
@@ -36,8 +36,8 @@ class JavascriptParser extends BaseParser {
 
     modules.forEach((mod) => {
       const { name } = mod;
-      const cloneConf = { ...conf, name: '' };
-      const merged = { ...cloneConf, ...mod };
+      const cloneConf = Object.assign({ name: '' }, conf);
+      const merged = Object.assign({}, cloneConf, mod);
       const rst = this.renderFn(merged);
       const out = path.join(conf.jsRoot, this.jsPath, 'modules', name);
 
@@ -50,8 +50,8 @@ class JavascriptParser extends BaseParser {
 
     modals.forEach((modal) => {
       const { name } = modal;
-      const cloneConf = { ...conf, name: '' };
-      const rst = this.renderFn({ ...cloneConf, isModal: true });
+      const cloneConf = Object.assign({ name: '' }, conf);
+      const rst = this.renderFn(Object.assign({ isModal: true }, cloneConf));
 
       const out = path.join(conf.jsRoot, this.jsPath, 'modals', name);
       this._writeFile(out, 'index.js', rst);
@@ -59,4 +59,4 @@ class JavascriptParser extends BaseParser {
   }
 }
 
-export default JavascriptParser;
+module.exports = JavascriptParser;

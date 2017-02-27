@@ -1,9 +1,9 @@
-import path from 'path';
-import { js_beautify } from 'js-beautify';
+const path = require('path');
+const { js_beautify } = require('js-beautify');
 
-import BaseParser from './base';
-import conf from '../../util/rc';
-import Url2Path from '../../util/url2path';
+const BaseParser = require('./base');
+const conf = require('../../util/rc');
+const Url2Path = require('../../util/url2path');
 
 /**
  * 页面nej入口文件entry.js解析
@@ -23,7 +23,7 @@ class EntryParser extends BaseParser {
 
   async writePage() {
     const meta = this.meta;
-    const merged = { ...meta, ...conf };
+    const merged = Object.assign({}, meta, conf);
     const rst = this.renderFn(merged);
 
     const out = path.join(conf.jsRoot, this.entryPath);
@@ -31,4 +31,4 @@ class EntryParser extends BaseParser {
   }
 }
 
-export default EntryParser;
+module.exports = EntryParser;

@@ -1,5 +1,5 @@
-import Builder from '../core/builder';
-import log from '../core/util/log';
+const Builder = require('../core/builder');
+const log = require('../core/util/log');
 
 exports.command = 'build [options]';
 

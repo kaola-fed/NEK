@@ -1,10 +1,10 @@
-import request from 'request-promise';
-import path from 'path';
+const request = require('request-promise');
+const path = require('path');
 
-import RouteDirective from './directives/route';
-import TemplateFactory from './templates/factory';
-import rc from './util/rc';
-import log from './util/log';
+const RouteDirective = require('./directives/route');
+const TemplateFactory = require('./templates/factory');
+const rc = require('./util/rc');
+const log = require('./util/log');
 
 /**
  * Builder类
@@ -75,4 +75,4 @@ class Builder {
   }
 }
 
-export default Builder;
+module.exports = Builder;

@@ -2,11 +2,11 @@
  * url与文件输出路径对应规则;
  * 规则详情参考:http://dwz.cn/4zmWNf
  */
-import URL from 'url';
-import decamelize from 'decamelize';
-import rc from './rc';
+const URL = require('url');
+const decamelize = require('decamelize');
+const rc = require('./rc');
 
-export default {
+module.exports = {
   ftl(url) {
     let pagePath = this.js(url);
     const pos = pagePath.lastIndexOf('/');

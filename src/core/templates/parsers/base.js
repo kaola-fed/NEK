@@ -2,14 +2,14 @@
  * 每个parser需要生成page.[ext]和子模块modules下的[name]/index.[ext];
  * 所以需要解析两遍json,一遍用于生成page.[ext], 一遍用于生成modules下的[name]/index.[ext]
  */
-import fs from 'fs';
-import path from 'path';
-import mkdirp from 'mkdirp-promise';
-import request from 'request-promise';
+const fs = require('fs');
+const path = require('path');
+const mkdirp = require('mkdirp-promise');
+const request = require('request-promise');
 
-import Handlebars from 'handlebars';
-import helpers from '../../util/helpers';
-import log from '../../util/log';
+const Handlebars = require('handlebars');
+const helpers = require('../../util/helpers');
+const log = require('../../util/log');
 
 class BaseParser {
   constructor(meta, force = false) {
@@ -86,4 +86,4 @@ class BaseParser {
 
 }
 
-export default BaseParser;
+module.exports = BaseParser;

@@ -1,7 +1,7 @@
-import FreeMarkerParser from './parsers/freemarker';
-import HtmlParser from './parsers/html';
-import JavascriptParser from './parsers/javascript';
-import EntryParser from './parsers/entry';
+const FreeMarkerParser = require('./parsers/freemarker');
+const HtmlParser = require('./parsers/html');
+const JavascriptParser = require('./parsers/javascript');
+const EntryParser = require('./parsers/entry');
 
 class TemplateFactory {
 
@@ -17,4 +17,4 @@ class TemplateFactory {
   }
 }
 
-export default TemplateFactory;
+module.exports = TemplateFactory;
