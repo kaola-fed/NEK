@@ -1,6 +1,6 @@
 const Builder = require('../core/builder');
 const log = require('../core/util/log');
-const Question = require('../core/questions/index');
+const _question = require('../core/questions/index');
 
 exports.command = 'build [options]';
 
@@ -29,8 +29,8 @@ exports.builder = {
     alias: 'question',
     demand: false,
     describe: '接受question，生成指定文件结构',
-    type: 'boolean'
-  }
+    type: 'boolean',
+  },
 };
 
 exports.handler = async (argv) => {
@@ -38,12 +38,12 @@ exports.handler = async (argv) => {
 
   try {
     const builder = new Builder(key, force);
-    if(question){
-      Question(function(options){
+    if (question) {
+      _question((options) => {
         builder.options = options;
         builder.run(url);
       });
-    }else{
+    } else {
       builder.run(url);
     }
   } catch (error) {
