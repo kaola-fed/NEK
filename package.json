@@ -48,7 +48,9 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
-    "mocha": "^3.1.2"
+    "inquirer": "^3.2.3",
+    "mocha": "^3.1.2",
+    "rx": "^4.1.0"
   },
   "engines": {
     "node": ">= 7.6.0"

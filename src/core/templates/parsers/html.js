@@ -18,7 +18,7 @@ class HtmlParser extends BaseParser {
   }
 
   format(content) {
-    return html(content, { indent_size: 2 });
+    return html(content, { indent_size: 4 });
   }
 
   async writePage() {
