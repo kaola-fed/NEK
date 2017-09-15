@@ -1,5 +1,6 @@
 const Builder = require('../core/builder');
 const log = require('../core/util/log');
+const _question = require('../core/questions/index');
 
 exports.command = 'build [options]';
 
@@ -24,14 +25,27 @@ exports.builder = {
     describe: '强制覆盖已经存在的文件',
     type: 'boolean',
   },
+  q: {
+    alias: 'question',
+    demand: false,
+    describe: '接受question，生成指定文件结构',
+    type: 'boolean',
+  },
 };
 
 exports.handler = async (argv) => {
-  const { key, url, force } = argv;
+  const { key, url, force, question } = argv;
 
   try {
     const builder = new Builder(key, force);
-    builder.run(url);
+    if (question) {
+      _question((options) => {
+        builder.options = options;
+        builder.run(url);
+      });
+    } else {
+      builder.run(url);
+    }
   } catch (error) {
     log.red(error);
   }

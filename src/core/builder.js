@@ -16,6 +16,7 @@ class Builder {
     this.key = key;
     this.force = force;
     this.meta = null;
+    this.options = {};
   }
 
   /**
@@ -59,6 +60,7 @@ class Builder {
           rows: [],
         },
         templates,
+        options: this.options,
       }, page);
     } catch (err) {
       log.red(err);
