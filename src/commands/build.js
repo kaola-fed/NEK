@@ -1,6 +1,6 @@
 const Builder = require('../core/builder');
 const log = require('../core/util/log');
-const _question = require('../core/questions/index');
+const _question = require('../core/questions/build/index');
 
 exports.command = 'build [options]';
 
