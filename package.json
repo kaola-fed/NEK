@@ -37,6 +37,7 @@
     "js-beautify": "^1.6.4",
     "mkdirp-promise": "^5.0.1",
     "moky": "git+https://git@github.com/kaola-fed/moky.git",
+    "ora": "^1.3.0",
     "rc": "^1.1.6",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",

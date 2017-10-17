@@ -4,17 +4,17 @@ const questions = [{
   message: '> 工程类型?',
   choices: [
     { name: 'nej + regular + nek-ui', value: 'nrn' },
-    { name: 'webpack + vue + element-ui(SPA)', value: 'wve' }
+    { name: 'webpack + vue + element-ui(SPA)', value: 'wve' },
   ],
   default: 'nrn',
 }, {
   name: 'keyword',
   type: 'string',
-  message: '> 关键字:'
+  message: '> 关键字:',
 }, {
   name: 'url',
   type: 'string',
-  message: '> 仓库地址:'
+  message: '> 仓库地址:',
 }, {
   name: 'confirm',
   type: 'list',

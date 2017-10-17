@@ -3,9 +3,7 @@ const Rx = require('rx');
 const makeQuestion = require('./questions.js');
 
 // 进行一下数据转换
-const formatOptions = (options) => {
-  return options;
-};
+const formatOptions = options => options;
 
 const makeQuestions = (name, callback) => {
   const prompts = new Rx.Subject();
@@ -21,7 +19,7 @@ const makeQuestions = (name, callback) => {
     options[answer.name] = answer.answer;
     prompts.onNext(makeQuestion(answer));
   });
-  prompts.onNext(makeQuestion({name: name}));
+  prompts.onNext(makeQuestion({ name }));
 };
 
 module.exports = makeQuestions;

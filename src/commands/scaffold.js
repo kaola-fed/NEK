@@ -1,6 +1,5 @@
 const Scaffold = require('../core/scaffold');
 const log = require('../core/util/log');
-const question = require('../core/questions/scaffold/index');
 
 exports.command = 'scaffold [options]';
 
@@ -11,7 +10,7 @@ exports.builder = {
     alias: 'init',
     demand: false,
     describe: '选择要创建的工程类型并创建',
-    type: 'boolean'
+    type: 'boolean',
   },
   a: {
     alias: 'add',
@@ -29,20 +28,20 @@ exports.builder = {
     alias: 'keyword',
     demand: false,
     describe: '模板关键词',
-    type: 'string'
+    type: 'string',
   },
   u: {
     alias: 'url',
     demand: false,
     describe: '远程模板url',
-    type: 'string'
+    type: 'string',
   },
   l: {
     alias: 'list',
     demand: false,
     describe: '映射列表',
-    type: 'boolean'
-  }
+    type: 'boolean',
+  },
 };
 
 exports.handler = async (argv) => {
