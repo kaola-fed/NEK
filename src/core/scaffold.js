@@ -95,8 +95,12 @@ class Scaffold {
 
   async getTpl(keyword) {
     const result = await request(`${rc.api}/scaffold/getUrl?keyword=${keyword}`, { json: true });
+    if(!result){
+      log.red('keyword do not exist, use `nek scaffold -l to check all map list`.');
+      process.exit(1);
+    }
     const spinner = ora('获取工程模板...').start();
-    await download(result.url, 'dist', {
+    await download(result.url, './', {
       extract: true,
       strip: 1,
     });
