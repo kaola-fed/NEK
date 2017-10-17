@@ -44,6 +44,7 @@
     "rx": "^4.1.0",
     "update-notifier": "^2.1.0",
     "uppercamelcase": "^1.1.0",
+    "valid-url": "^1.0.9",
     "yargs": "^6.2.0"
   },
   "devDependencies": {

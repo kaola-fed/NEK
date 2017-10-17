@@ -10,30 +10,18 @@ exports.builder = {
     alias: 'init',
     demand: false,
     describe: '选择要创建的工程类型并创建',
-    type: 'boolean',
+    type: 'string',
   },
   a: {
     alias: 'add',
     demand: false,
     describe: '添加映射',
-    type: 'boolean',
+    type: 'string',
   },
   d: {
     alias: 'del',
     demand: false,
     describe: '删除映射',
-    type: 'boolean',
-  },
-  k: {
-    alias: 'keyword',
-    demand: false,
-    describe: '模板关键词',
-    type: 'string',
-  },
-  u: {
-    alias: 'url',
-    demand: false,
-    describe: '远程模板url',
     type: 'string',
   },
   l: {

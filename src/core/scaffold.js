@@ -1,10 +1,11 @@
 const request = require('request-promise');
-const question = require('./questions/scaffold/index');
+// const question = require('./questions/scaffold/index');
 
 const rc = require('./util/rc');
 const log = require('./util/log');
 const ora = require('ora');
 const download = require('download');
+const validUrl = require('valid-url');
 
 class Scaffold {
   constructor(options) {
@@ -12,33 +13,52 @@ class Scaffold {
   }
 
   async run() {
-    const { init, add, del, keyword, url, list } = this.options;
+    const { init, add, del, list } = this.options;
     if (list) {
       this.list();
-    }
-    if (add) {
+    } else if (add !== undefined) {
+      const [keyword, url] = this.getNextParam(['-a', '-add'], 2);
       if (!keyword || !url) {
-        log.red('use nek scaffold -a -k [keyword] -u [url] to add a map.');
+        log.red('use nek scaffold -a [keyword] [url] to add a map.');
+        process.exit(1);
+      }
+      if (!validUrl.isUri(url)) {
+        log.red('url invalid.');
         process.exit(1);
       }
       this.add(keyword, url);
-    }
-    if (del) {
+    } else if (del !== undefined) {
+      const keyword = del;
       if (!keyword) {
-        log.red('use nek scaffold -d -k [keyword] to delete an existed map,\nor use `nek scaffold -l to check all map list`.');
+        log.red('use nek scaffold -d [keyword] to delete an existed map,\nor use `nek scaffold -l to check all map`.');
         process.exit(1);
       }
       this.remove(keyword);
+    } else if (init !== undefined) {
+      const keyword = init;
+      this.getTpl(keyword);
+      // question('init', (options) => {
     }
-    if (init) {
-      if (keyword) {
-        this.getTpl(keyword);
-      } else {
-        question('init', (options) => {
-          console.log(options);
-          // this.getTpl();
-        });
-      }
+  }
+
+  getNextParam(param, length) {
+    let location = -1;
+    const argv = [...process.argv];
+    if (typeof param === 'string') {
+      location = argv.indexOf(param);
+    } else if (Array.isArray(param)) {
+      argv.find((value, index) => {
+        if (param.indexOf(value) !== -1) {
+          location = index;
+          return true;
+        }
+        return false;
+      });
+    }
+    if (location !== -1) {
+      argv.splice(0, location + 1);
+      argv.length = length;
+      return argv;
     }
   }
 
@@ -68,8 +88,9 @@ class Scaffold {
 
   async list() {
     const map = await request(`${rc.api}/scaffold/map`, { json: true });
-    const list = map.map(value => ({ keyword: value.keyword, url: value.url }));
-    console.log(list);
+    map.forEach((value) => {
+      log.green(`${value.keyword} => ${value.url}`);
+    });
   }
 
   async getTpl(keyword) {
