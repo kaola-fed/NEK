@@ -10,7 +10,33 @@ NEK 是考拉前端提高开发效率开发的一个脚手架工具链，主要�
 ![](https://cdn.int64ago.org/dttms37fojiv7jtixdpldi.PNG)
 
 ## 如何使用
-#### 配置
+
+### nek scaffold
+
+**options：**
+
+  --help      显示帮助信息               [布尔]  
+  --version   显示版本号                 [布尔]  
+  -i, --init  选择要创建的工程类型并创建   [字符串]  
+  -a, --add   添加映射                [字符串]  
+  -d, --del   删除映射                [字符串]  
+  -l, --list  映射列表                  [布尔]  
+
+1. `nek scaffold -a [keyword] [url]`添加一条映射,  
+映射关系通过nek-server api保存在数据库中，比如:
+`nek scaffold -a regular+nekui https://github.com/smallcosmos/RNST/archive/master.zip`
+2. `nek scaffold -d [keyword]`删除一条已有的映射
+3. `nek scaffold -l`查看已有的所有映射
+4. `nek scaffold -i [keyword]`拉取一份前端框架模板
+
+通过nek scaffold命令行管理的各类框架模板包含了  
+Nej+Regular+Nekui，  
+Webpack+Regular+Nekui SPA，  
+以及Webpack+Vue+Elementui等等，  
+还可以自定义配置各种框架模板，通过nek scaffold -a加入映射关系。
+
+
+#### nek build配置
 NEK 的配置需要在项目的前端根目录创建一个名为 `.nekrc` 的文件，配置以下字段：
 ```
 {
