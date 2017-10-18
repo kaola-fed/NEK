@@ -1,5 +1,4 @@
 const request = require('request-promise');
-// const question = require('./questions/scaffold/index');
 
 const rc = require('./util/rc');
 const log = require('./util/log');
@@ -37,7 +36,6 @@ class Scaffold {
     } else if (init !== undefined) {
       const keyword = init;
       this.getTpl(keyword);
-      // question('init', (options) => {
     }
   }
 
@@ -95,7 +93,7 @@ class Scaffold {
 
   async getTpl(keyword) {
     const result = await request(`${rc.api}/scaffold/getUrl?keyword=${keyword}`, { json: true });
-    if(!result){
+    if (!result) {
       log.red('keyword do not exist, use `nek scaffold -l to check all map list`.');
       process.exit(1);
     }
