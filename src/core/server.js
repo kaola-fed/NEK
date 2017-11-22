@@ -96,8 +96,8 @@ class Server {
         const out = path.join(rc.pageRoot, ftlPath.path);
         //使用handlebars处理变量
         const template = Handlebars.compile(this.meta.ftl);
-        const entryPath = Url2Path.js(this.meta.url);
-        const rst = template({ entryPath });
+        const pageName = Url2Path.js(this.meta.url);
+        const rst = template({ pageName });
         this._writeFile(out, `${ftlPath.name}.ftl`, rst);
     }
 
@@ -130,8 +130,10 @@ class Server {
     }
 
     async render() {
-        this.meta.ftl && this.writeFtl();
-        this.meta.entry && this.writeEntry();
+        if (this.meta.type == ProjectTypes.NEJ) {
+            this.meta.ftl && this.writeFtl();
+            this.meta.entry && this.writeEntry();
+        }
         this.meta.index && this.writeIndex();
         this.meta.modules && this.writeDirs('modules');
         this.meta.modals && this.writeDirs('modals');
