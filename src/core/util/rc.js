@@ -11,6 +11,7 @@ const config = rc('nek', {
   BaseModal: 'pro/components/modal/modal',
   // urlMaps: './moky.urlMaps.js',
   api: 'http://nek.kaolafed.com/api',
+  serverApi: 'http://nek-server.kaolafed.com:3000',
 });
 
 module.exports = config;
