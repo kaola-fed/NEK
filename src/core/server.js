@@ -87,6 +87,9 @@ class Server {
   }
 
   async _writeFile(dir, filename, content, ext) {
+    if (!content) {
+      return;
+    }
     const out = path.join(dir, filename);
     if (fs.existsSync(out) && !this.force) {
       return log.yellow(`Exist File: ${out}`);
@@ -102,6 +105,9 @@ class Server {
   }
 
   async writeFtl() {
+    if (!this.meta.ftl) {
+      return;
+    }
     const ftlPath = Url2Path.ftl(this.meta.url);
     const out = path.join(rc.pageRoot, ftlPath.path);
     // 使用handlebars处理变量
@@ -112,36 +118,42 @@ class Server {
   }
 
   async writeEntry() {
+    if (!this.meta.entry) {
+      return;
+    }
     const entryPath = Url2Path.js(this.meta.url);
     const out = path.join(rc.jsRoot, entryPath);
     this._writeFile(out, 'entry.js', this.meta.entry, 'js');
   }
 
   async writeIndex() {
+    if (!this.meta.index) {
+      return;
+    }
     const indexPath = Url2Path.js(this.meta.url);
     const out = path.join(rc.jsRoot, indexPath);
     if (this.meta.type === ProjectTypes.NEJ) {
       this._writeFile(path.join(out, 'modules'), 'page.html', this.meta.index.html, 'html');
       this._writeFile(path.join(out, 'modules'), 'page.js', this.meta.index.js, 'js');
-      this.writeMock(this.meta.index.url, this.meta.index.mock);
     } else {
       this._writeFile(out, 'index.html', this.meta.index.html, 'html');
       this._writeFile(out, 'index.js', this.meta.index.js, 'js');
     }
+    this.writeMock(this.meta.index.url, this.meta.index.mock);
   }
 
   async writeDirs(dir) {
     const dirPath = Url2Path.js(this.meta.url);
     const out = path.join(rc.jsRoot, dirPath);
     const dirs = this.meta[dir];
-    /* eslint guard-for-in: "error" */
-    for (let dirname in dirs) {
-      if (dirs.hasOwnProperty(dirname)) {
-        this._writeFile(`${out}/${dir}/${dirname}`, 'index.js', dirs[dirname].js, 'js');
-        this._writeFile(`${out}/${dir}/${dirname}`, 'index.html', dirs[dirname].html, 'html');
-        this.writeMock(dirs[dirname].url, dirs[dirname].mock);
-      }
+    if (!dirs) {
+      return;
     }
+    Object.keys(dirs).forEach((dirname) => {
+      this._writeFile(`${out}/${dir}/${dirname}`, 'index.js', dirs[dirname].js, 'js');
+      this._writeFile(`${out}/${dir}/${dirname}`, 'index.html', dirs[dirname].html, 'html');
+      this.writeMock(dirs[dirname].url, dirs[dirname].mock);
+    });
   }
 
   async writeMock(url, data) {
@@ -156,15 +168,26 @@ class Server {
     }
   }
 
+  async writeMixins() {
+    if (!this.meta.mixins) {
+      return;
+    }
+    const dirPath = Url2Path.js(this.meta.url);
+    const out = path.join(rc.jsRoot, dirPath);
+    Object.keys(this.meta.mixins).forEach((item) => {
+      this._writeFile(`${out}/mixins`, `${item}.js`, this.meta.mixins[item], 'js');
+    });
+  }
+
   async render() {
     if (this.meta.type === ProjectTypes.NEJ) {
-      this.meta.ftl && this.writeFtl();
-      this.meta.entry && this.writeEntry();
+      this.writeFtl();
+      this.writeEntry();
     }
-    this.meta.index && this.writeIndex();
-    this.meta.modules && this.writeDirs('modules');
-    this.meta.modals && this.writeDirs('modals');
-    this.meta.mixins && this.writeDirs('mixins');
+    this.writeIndex();
+    this.writeDirs('modules');
+    this.writeDirs('modals');
+    this.writeMixins();
   }
 
   format(content, ext) {

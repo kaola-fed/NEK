@@ -1,6 +1,6 @@
 {
   "name": "nek",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Nice Easy Kaoka Project Toolkit.",
   "scripts": {
     "test": "mocha --recursive",
