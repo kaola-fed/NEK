@@ -55,6 +55,7 @@ class Server {
       });
       this.meta = {
         url: data.url,
+        title: data.title,
         type: data.type,
         ftl: data.ftl,
         entry: data.entry,
@@ -113,7 +114,7 @@ class Server {
     // 使用handlebars处理变量
     const template = Handlebars.compile(this.meta.ftl);
     const pageName = Url2Path.js(this.meta.url);
-    const rst = template({ pageName });
+    const rst = template({ pageName, title: this.meta.title });
     this._writeFile(out, `${ftlPath.name}.ftl`, rst);
   }
 
@@ -152,6 +153,7 @@ class Server {
     Object.keys(dirs).forEach((dirname) => {
       this._writeFile(`${out}/${dir}/${dirname}`, 'index.js', dirs[dirname].js, 'js');
       this._writeFile(`${out}/${dir}/${dirname}`, 'index.html', dirs[dirname].html, 'html');
+      this.writeMixin(out, `${out}/${dir}/${dirname}`, dirs[dirname].mixin);
       this.writeMock(dirs[dirname].url, dirs[dirname].mock);
     });
   }
@@ -165,6 +167,17 @@ class Server {
       }
       this._writeFile(path.join(mockRoot, 'async_mock', 'get', mockPath.dir), `${mockPath.name}.json`, data, 'js');
       this._writeFile(path.join(mockRoot, 'async_mock', 'post', mockPath.dir), `${mockPath.name}.json`, data, 'js');
+    }
+  }
+
+  async writeMixin(dir, dirname, mixin) {
+    if (!mixin) {
+      return;
+    }
+    if (Object.keys(this.meta.modules).length === 1) {
+      this._writeFile(`${dir}/mixins`, 'list.action.js', mixin, 'js');
+    } else {
+      this._writeFile(`${dirname}/mixins`, 'list.action.js', mixin, 'js');
     }
   }
 
@@ -201,6 +214,7 @@ class Server {
       out = out.replace(/^\s*[\r\n]/gm, '');
       return out;
     } else if (ext === 'html') {
+      content.replace(/<\/?ns-empty>/g, '');
       out = html(content);
     }
     return content;
