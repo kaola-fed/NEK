@@ -214,8 +214,9 @@ class Server {
       out = out.replace(/^\s*[\r\n]/gm, '');
       return out;
     } else if (ext === 'html') {
-      content.replace(/<\/?ns-empty>/g, '');
+      content = content.replace(/<\/?ns-empty>/g, '');
       out = html(content);
+      return out;
     }
     return content;
   }
